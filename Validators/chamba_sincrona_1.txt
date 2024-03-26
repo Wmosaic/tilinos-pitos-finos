@@ -1,14 +1,14 @@
-validador de numeros
+validador de numeros -- AGUS
     codigo para asegurar el formato numerico en la captura de datos
-validador consistencia de strings
+validador consistencia de strings -- AGUS
     codigo para asegurar la consistencia de la captura, asegurando
     que las cadenas deban solo tener cadenas, y los numeros solo numeros
-validador de cadenas vacias
+validador de cadenas vacias -- VILLA
     codigo para asegurar que la cadena capturada no sea vacia ni null
-validador de rangos
+validador de rangos -- AMBOS
     codigo para asegurar que la entrada de datos sea de cierto
     rango o tamano
-validador de directorios
+validador de directorios -- VILLA
     codigo para asegurar que el directorio existe
 
 
