@@ -83,20 +83,18 @@
 	regresar variable
 
 5.(Privado) Archivo getDirs(directorio:String)
-    Archivo ruta = nuevo Archivo(directorio)
+    Archivo ruta = nuevo Archivo(directorio)     //Referencia al tipo de dato Archivo 
 	Si (ruta.existe() Y ruta.esDirectorio()) //Funciones de biblioteca C++ y Java
 	    Archivo[] archivos = nuevo Archivo()
 		regresar archivos
 	De lo contrario
 	    imprimir "Directorio no existente."
 	
-
-6.(Publico) boolean cadVal(cadena:String) // || = Operador logico OR 
-    Si (cadena.longitud() != 0 || cadena != null)
+6.(Publico) boolean cadVal(cadena:String)
+    Si (cadena.longitud() != 0 Y cadena != null)
 	    regresar Verdadero
 	De lo contrario
 	    regresar Falso
-
 
 /* 
  * Como tema aparte, la manera de manejar archivos y mostrar directorios es 
