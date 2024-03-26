@@ -81,3 +81,41 @@
 	Terminar Mientras
 
 	regresar variable
+
+5.(Privado) Archivo getDirs(directorio:String)
+    Archivo ruta = nuevo Archivo(directorio)
+	Si (ruta.existe() Y ruta.esDirectorio()) //Funciones de biblioteca C++ y Java
+	    Archivo[] archivos = nuevo Archivo()
+		regresar archivos
+	De lo contrario
+	    imprimir "Directorio no existente."
+	
+
+6.(Publico) boolean cadVal(cadena:String) // || = Operador logico OR 
+    Si (cadena.longitud() != 0 || cadena != null)
+	    regresar Verdadero
+	De lo contrario
+	    regresar Falso
+
+
+/* 
+ * Como tema aparte, la manera de manejar archivos y mostrar directorios es 
+ * muy diferente entre los distintos lenguajes de programacion, lo que da la
+ * necesidad de generar multiples algoritmos para distintos lenguajes,
+ * hara falta discutir como se va a proceder con estas funciones particulares,
+ * sin embargo, esta estructura se repite en C++ y en Java, asi que he creado
+ * este algoritmo por el momento.
+ */
+
+7.(Publico) void printDirs(directorio:String)
+    Si (getDirs(directorio) es instancia de Archivo)  // Esta linea hace referencia al
+        Para cada Archivo arch en archivos Empezar  //tipo de dato Archivo ya existente
+		    imprimir arch
+		Terminar Para
+
+8.(Publico) String invertirCadena(cadena:String) 
+    String aux = ""
+	Para i = (cadena.longitud() - 1); hasta i == 0; con paso -1 Empezar
+	    aux += cadena[i]
+	Terminar Para
+	regresar aux	 
