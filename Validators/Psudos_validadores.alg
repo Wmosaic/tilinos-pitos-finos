@@ -129,12 +129,45 @@
  * este algoritmo por el momento.
  */
 
+9.(Publico) void printDirs(directorio:String)
     Si (getDirs(directorio) es instancia de Archivo)  // Esta linea hace referencia al
         Para cada Archivo arch en archivos Empezar  //tipo de dato Archivo ya existente
 		    imprimir arch
 		Terminar Para
 
-8.(Publico) String invertirCadena(cadena:String) 
-	Para i = (cadena.longitud() - 1); hasta i == 0; con paso -1 Empezar
-	Terminar Para
-	regresar aux	 
+10.(Publico) (String) capFech(mensaje:string)
+	imprimir mensaje
+	leer variable
+
+	Mientras NO(esFecha(variable)) Empezar
+		imprimir mensaje
+		leer variable
+	
+	Regresar variable
+/*
+* El capCSV tiene como funcion verificar que todos los datos de una fila
+* tengan el formato adecuado, es decir, que no haya un "mat3o", un numero
+* mal capturado o una fecha con el formato incorrecto, iterando un contador
+* que al final de la del ciclo verifica si la longitud del arreglo/lista
+* son iguales, en ese caso todo esta bien de lo contrario hubo un elemento
+* que no paso el formato entoces hay un dato invalido.
+*
+*/
+
+11.(Publico) (boolean) capCSV(eleFila: arreglo/lista)
+	items[50]
+	cuenta = 0
+
+	Para i=0; i < eleFila.longitud; i++
+		Si esNom(eleFila[i])
+			cuenta++
+		Si esNum(eleFila[i])
+			cuenta++
+		Si esFecha(eleFila[i])
+			cuenta++
+	
+	Si cuenta == eleFila.longitud() 
+		regresar Verdadero
+	De lo contrario
+		regresar Falso
+
