@@ -67,7 +67,7 @@
 
 	regresar variable.convertidoANumero()
 
-5.(Publico) (String) capCade(mensaje:String)
+5.(Publico) (String) capNom(mensaje:String)
 	imprimir mensaje
 	leer variable
 
