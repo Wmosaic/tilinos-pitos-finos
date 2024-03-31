@@ -10,6 +10,3 @@ validador de rangos -- AMBOS
     rango o tamano
 validador de directorios -- VILLA
     codigo para asegurar que el directorio existe
-
-
-
