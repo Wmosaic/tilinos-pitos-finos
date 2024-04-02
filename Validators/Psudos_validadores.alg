@@ -1,22 +1,52 @@
+/* Hace falta que los metodos sean privados??
+ * aunque si, es una buena practica para el encapsulamiento
+ * habra ocasiones donde no necesitemos un capInt o un capCSV
+ * pero habra otras donde necesitaremos validar datos, sobre 
+ * todo porque a mas gente manejando codigo, mayor es la prob
+ * de que alguien no lea la documentacion del codigo, y quiera
+ * pasar datos de un tipo donde no corresponde. Aunque si te
+ * parece apropiado mantener esos metodos en private, lo respeto
+ * y puedo reflejar esos cambios en los validadores de c++
+ */
 
-1.(Privado) boolean esNum(cadena:String) 
+
+1A.(Privado) boolean esNum(cadena:String) 
 	Intentar
 		cadena.convertirANumero()
 		regresar Verdadero
 	en Exepcion regresar Falso
 
-2.(Privado) boolean esNom(cadena:String)
+1B.(Publico) boolean esNum(cadena:String)
+    String patron = "^\d+(\.\d+)?$" 		
+	// Patron regex para discriminar numeros
+	
+	regresar buscarPatron(cadena, patron)
+
+2A.(Privado) boolean esNom(cadena:String)
 	//Esta es una forma para determinar los metodos tipo el lenguaje
 	//Uno es como Python y otro tipo Java o C++
 	Si No (esNum(cadena)) Y cadena.longitud() > 0
 		regresar Verdadero
 	De lo contrario regresar Falso
+
+2B.(Publico) boolean esNom(cadena:String)
+	String patron = "^[^\d]+$"
+	// Patron regex para discriminar cadenas, si topa un numero hay false
 	
-3.(Privado) boolean esFecha(cadena:String)
+	regresar buscarPatron(cadena, patron)
+	
+3A.(Privado) boolean esFecha(cadena:String)
 	Intentar
 		cadena.TieneFormato(cadena,'dd/mm/yyyy')
 		Regresar Verdadero
 	en Exepcion regresar Falso
+
+3B.(Publico) boolean esFecha(cadena:String)
+	String patron = "^\d{2}(/|-|\.|_)\d{2}(/|-|\.|_)\d{4}$"
+	// Patron regex para aceptar formato de fecha separado por
+	// los caracteres '/','.','-','_'
+
+	regresar buscarPatron(cadena, patron)
 
 4.(Publico) (int,double) capNumero(mensaje:String)
 	imprimir mensaje
