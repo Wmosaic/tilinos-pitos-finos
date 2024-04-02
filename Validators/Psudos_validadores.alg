@@ -90,7 +90,7 @@
 	regresar variable
 
 6.(Publico) boolean cadVal(cadena:String)
-    Si (cadena.longitud() != 0 Y cadena != null)
+    Si (cadena.longitud() != 0 || cadena != null)
 	    regresar Verdadero
 	De lo contrario regresar Falso
 
