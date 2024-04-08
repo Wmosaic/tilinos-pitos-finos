@@ -3,9 +3,11 @@
 #include <string>
 #include <regex>
 #include <iostream>
+#include <vector>
 #include <filesystem>
 
 namespace fs = std::filesystem;
+
 
 bool isNum(std::string prueba){
             std::string patron{"^\d+(\.\d+)?$"};
@@ -171,14 +173,27 @@ std::string capDate(std::string mensaje){
     return aux;
 }
 
-void printDirs(std::string directorio){
+auto getDirs(std::string directorio){
     if (!isDir(directorio)){
         std::cout << "Directorio invalido.";
-    } else {
-        fs::path ruta{directorio};
-        for (const auto& arch : fs::directory_iterator(ruta))
-            std::cout << arch.path() << "\n";
+        return std::vector<fs::path>();
     }
+    std::vector<fs::path> dirs;
+    fs::path ruta{directorio};
+    for (const auto& arch : fs::directory_iterator(ruta)){
+        std::cout << arch.path() << "\n";
+        dirs.push_back(arch.path());
+    }
+    return dirs;
+}
+
+void printDirs(std::string directorio){
+     if (!isDir(directorio)){
+        std::cout << "Directorio invalido.";
+    }
+    fs::path ruta{directorio};
+    for (const auto& arch : fs::directory_iterator(ruta))
+        std::cout << arch.path() << "\n";
 }
 
 bool csvVal(std::string ruta); // Trabajo en proceso, ya existe la declaracion de 

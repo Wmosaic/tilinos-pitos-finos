@@ -37,6 +37,8 @@ class Validators {
 
         std::string capDate(std::string mensaje);
 
+        auto getDirs(std::string directorio);
+
         void printDirs(std::string directorio);
 
         bool csvVal(std::string ruta); // Trabajo en proceso, ya existe la declaracion de 
