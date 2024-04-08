@@ -174,11 +174,11 @@ std::string capDate(std::string mensaje){
 }
 
 auto getDirs(std::string directorio){
+    std::vector<fs::path> dirs;
     if (!isDir(directorio)){
         std::cout << "Directorio invalido.";
-        return std::vector<fs::path>();
+        return dirs;
     }
-    std::vector<fs::path> dirs;
     fs::path ruta{directorio};
     for (const auto& arch : fs::directory_iterator(ruta)){
         std::cout << arch.path() << "\n";
