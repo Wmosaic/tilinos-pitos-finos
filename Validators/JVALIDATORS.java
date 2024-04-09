@@ -57,4 +57,23 @@ class JVALIDATORS {
         return numAux;
     }
 
+    int capInt(String mensaje, int limiteI, int limiteS){
+        System.out.println(mensaje);
+        Scanner entrada = new Scanner(System.in);
+        String aux = entrada.nextLine();
+        int numAux;
+
+        do{
+            while(!isNum(aux)){
+                System.out.println(mensaje);
+                aux = entrada.nextLine();
+        }
+        numAux = Integer.parseInt(aux);
+        if(!(limiteI <= numAux || limiteS >= numAux))
+            System.out.println("El valor debe estar entre " + limiteI + " y " + limiteS);
+        } while(!(limiteI <= numAux || limiteS >= numAux));
+        entrada.close();
+        return numAux;
+    }
+
 }
