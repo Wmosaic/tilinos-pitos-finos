@@ -10,10 +10,10 @@ namespace fs = std::filesystem;
 
 
 bool isNum(std::string prueba){
-            std::string patron{"^\d+(\.\d+)?$"};
-            std::basic_regex<char> patronRegex{patron};
+    std::string patron{"^\d+(\.\d+)?$"};
+    std::basic_regex<char> patronRegex{patron};
 
-            return std::regex_search(prueba, patronRegex);
+    return std::regex_search(prueba, patronRegex);
 }
 
 bool isNom(std::string prueba){
@@ -181,7 +181,6 @@ auto getDirs(std::string directorio){
     }
     fs::path ruta{directorio};
     for (const auto& arch : fs::directory_iterator(ruta)){
-        std::cout << arch.path() << "\n";
         dirs.push_back(arch.path());
     }
     return dirs;
