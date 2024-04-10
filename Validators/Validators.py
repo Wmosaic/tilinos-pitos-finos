@@ -226,14 +226,7 @@ class Validators:
                 cuenta = 0
         print("No hay errores en su archivo: :D")
     
-    def capFile(self,Direc,Archivos):
-        cuenta = 0
-        
-        for i in range(0,len(Archivos),1):
-            if self.isFile(Direc+'/'+Archivos[i]):
-                cuenta+=1
-        
-        return cuenta != 0 
+
     
     #Directorio validado responsabilidad del programador
     def gepFiles(self,direccion,ext=".csv"):
@@ -253,7 +246,7 @@ class Validators:
         if self.isDire(direc):
             myF = listdir(self.forDireccion(direc))
             
-        while self.isDire(direc) == False or self.capFile(direc,myF) == False:
+        while self.isDire(direc) == False:
             print(Error)
             direc = input(mensaje)
             if self.isDire(direc):
