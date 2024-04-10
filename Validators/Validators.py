@@ -226,8 +226,6 @@ class Validators:
                 cuenta = 0
         print("No hay errores en su archivo: :D")
     
-
-    
     #Directorio validado responsabilidad del programador
     def gepFiles(self,direccion,ext=".csv"):
         myList = listdir(self.forDireccion(direccion))
