@@ -1,44 +1,35 @@
 from multipledispatch import dispatch
 from math import ceil
 from datetime import datetime
-from os import listdir
+from os import listdir,abort,path
 
 class Validators:
     #Constructor por omision y vacio xdxd
     def __init__(self):
         pass
-    
-    def __forDireccion(self,m):
-        newD = ""
-        
-        for c in m:
-            if c == "\\": c = '/'
-            if c == '"': c = ''
-            newD += c
-            
-        return newD     
 
     #Verifica si es un numero
-    def __isNum(self, cadena): 
+    def __isNume(self, cadena): 
         try:
             float(cadena)
             return True
         except ValueError: return False            
     
     #Verifica si es una cadena Pura (sin caracteres o numeros)
-    def __isNom(self, cadena): 
+    def __isNomb(self, cadena): 
         defaulth = True
-        lisnas = cadena.rsplit(' ')
+        lisnas = cadena.rsplit()
     
         for st in lisnas:
             if not(st.isalpha()):
                 defaulth = False
                 break
+        if len(cadena) == 0: defaulth = False
         return defaulth
     
     #Verifica si es una fecha en el Formato dd/mm/aaaa y si el año es mayor de 1900
     #Se obtiene un objeto data con el metodo strptime
-    def __isFecha(self, fecha): 
+    def __isDate(self, fecha): 
         try:
             datetime.strptime(fecha, '%d/%m/%Y')
             match len(fecha):
@@ -47,10 +38,21 @@ class Validators:
                 case 8:  return int(fecha[4:8]) >= 1900
         except ValueError: return False
     
+    #Manejo de archivos en Python forDireccion hasta isFile
+    def forDireccion(self,m):
+        newD = ""
+        
+        for c in m:
+            if c == "\\": c = '/'
+            if c == '"': c = ''
+            newD += c
+            
+        if len(m) == 0: return newD
+        else: return str(newD)+'/'
     
-    def __isDirec(self, Directorio):
+    def isDire(self, Directorio):
         try:
-            listdir(Directorio)
+            listdir(self.forDireccion(Directorio))
             return True
         except FileNotFoundError:
             return False
@@ -58,12 +60,22 @@ class Validators:
             return False
         except UnicodeDecodeError:
             return False
+    
+    def isFile(self,direccion):
+        try:
+            d = self.forDireccion(direccion)
+            p =  d[len(d)-1:]
+            if p == '/': d = d[:-1]
+            with open(d,encoding='UTF-8'):
+                return True
+        except: 
+            return False
         
     @dispatch(str)
     def capCade(self,texto):
         cad = input(texto)
         
-        while not(self.__isNom(cad)):
+        while not(self.__isNomb(cad)):
             print("Solo letras")
             cad = input(texto)
         
@@ -75,7 +87,7 @@ class Validators:
         mensError += "el numero de caracteres: {:}".format(limC)
         cad = input(texto)
         
-        while not(self.__isNom(cad)) or not(len(cad) <= limC):
+        while not(self.__isNomb(cad)) or not(len(cad) <= limC):
             print(mensError)
             cad = input(texto)
         
@@ -85,7 +97,7 @@ class Validators:
     def capReal(self, texto):
         numR = input(texto)
         
-        while not(self.__isNum(numR)):
+        while not(self.__isNume(numR)):
             print("No se permiten letras")
             numR = input(texto)
             
@@ -98,13 +110,13 @@ class Validators:
         vr = False
         numR = input(texto)
         
-        if self.__isNum(numR): 
+        if self.__isNume(numR): 
             vr = float(numR) >= lim    
         
-        while (not(self.__isNum(numR)) or not(vr)):
+        while (not(self.__isNume(numR)) or not(vr)):
             print(mensError)
             numR = input(texto)        
-            if self.__isNum(numR): 
+            if self.__isNume(numR): 
                 vr = float(numR) >= lim  
                       
         return float(numR)
@@ -116,14 +128,14 @@ class Validators:
         vr = False
         numR = input(texto)
         
-        if self.__isNum(numR): 
+        if self.__isNume(numR): 
             vr = limI <= float(numR) <= limS  
         
-        while (not(self.__isNum(numR)) or not(vr)):
+        while (not(self.__isNume(numR)) or not(vr)):
             print(mensError)
             numR = input(texto)        
             
-            if self.__isNum(numR): 
+            if self.__isNume(numR): 
                 vr = limI <= float(numR) <=limS  
                 
         return float(numR)
@@ -132,7 +144,7 @@ class Validators:
     def capInte(self,texto):
         numI = input(texto)
         
-        while not(self.__isNum(numI)):
+        while not(self.__isNume(numI)):
             print("No se permiten letras")
             numI = input(texto)
         
@@ -145,13 +157,13 @@ class Validators:
         vr = False
         numI = input(texto)
         
-        if self.__isNum(numI): 
+        if self.__isNume(numI): 
             vr = abs(ceil(float(numI))) >= lim    
         
-        while (self.__isNum(numI) or vr == False):
+        while (self.__isNume(numI) or vr == False):
             print(mesnError)
             numI = input(texto)        
-            if self.__isNum(numI): 
+            if self.__isNume(numI): 
                 vr = abs(ceil(float(numI))) >= lim    
                 
         return abs(ceil(float(numI))) #Si un chistoso captura -89.5 regresa 89 
@@ -163,13 +175,13 @@ class Validators:
         vr = False
         numI = input(texto)
         
-        if self.__isNum(numI): 
+        if self.__isNume(numI): 
             vr = limI <= abs(ceil(float(numI))) <= limS   
         
-        while (not(self.__isNum(numI)) or not(vr)):
+        while (not(self.__isNume(numI)) or not(vr)):
             print(mensError)
             numI = input(texto)        
-            if self.__isNum(numI): 
+            if self.__isNume(numI): 
                 vr = limI <= abs(ceil(float(numI))) <= limS      
                 
         return abs(ceil(float(numI))) 
@@ -180,7 +192,7 @@ class Validators:
         mensError = "Fecha invalida o año menor de 1900"
         fecha = input(texto)
         
-        while not(self.__isFecha(fecha)):
+        while not(self.__isDate(fecha)):
             print(mensError)
             fecha = input(texto) 
            
@@ -194,35 +206,57 @@ class Validators:
     def reversoCad(self, cadena):
         return cadena[::-1]
 
-    def capCSV(self,lisCSV):
-        ele = []
-        for i in range(len(lisCSV)):
-            if self.__isNom(lisCSV[i]):
-                ele.append(True)
-            if self.__isNum(lisCSV[i]):
-                ele.append(True)
-            if self.__isFecha(lisCSV[i]):
-                ele.append(True)
-        if len(ele) == (len(lisCSV)):
-            return True
-        else:
-            return False
+    #Manejo de Archivos
+    #La direccion deber ser valida responsabilidad del programador
+    #Tanto isFile y isDirec tienen que ser verdaderos
+    def capCSV(self,direc) -> None:
+        rowError,cuenta = 1,0
+        with open(direc,encoding='UTF-8') as csvFile: 
+            csvFile.readline()
+            for lines in csvFile:
+                rowError += 1 
+                myLis = lines.rstrip().split(',')
+                for lin in myLis:   
+                    if self.__isNomb(lin): cuenta += 1
+                    if self.__isNume(lin): cuenta += 1
+                    if self.__isDate(lin): cuenta += 1 
+                if len(myLis) != cuenta:
+                    print("Hay un error en la linea: "+str(rowError))
+                    abort()
+                cuenta = 0
+        print("No hay errores en su archivo: :D")
     
-    def capDireccion(self, mensaje):
-        Error = "Hubo un problema con la ruta de acceso, verifique por favor"
-        direc = input(mensaje)
+    def capFile(self,Direc,Archivos):
+        cuenta = 0
         
-        while not(self.__isDirec(self.__forDireccion(direc))):
+        for i in range(0,len(Archivos),1):
+            if self.isFile(Direc+'/'+Archivos[i]):
+                cuenta+=1
+        
+        return cuenta != 0 
+    
+    #Directorio validado responsabilidad del programador
+    def gepFiles(self,direccion,ext=".csv"):
+        myList = listdir(self.forDireccion(direccion))
+        myFiles = [x for x in myList if x.lower().endswith(ext)]
+        
+        for f in range(0,len(myFiles),1): print(f"{f+1}. {myFiles[f]}")
+
+        return myFiles
+    
+    def capDire(self,mensaje):
+        myF = []
+        Error = "Hubo un problema con la ruta de acceso"
+        Error += " O ningun archivo se puede abrir"
+        direc = input(mensaje)
+
+        if self.isDire(direc):
+            myF = listdir(self.forDireccion(direc))
+            
+        while self.isDire(direc) == False or self.capFile(direc,myF) == False:
             print(Error)
             direc = input(mensaje)
-
-        return self.__forDireccion(direc)
+            if self.isDire(direc):
+                myF = listdir(self.forDireccion(direc))
         
-    def getFiles(self,direccion):
-        
-        myFiles = listdir(direccion)
-        
-        for f in range(0,len(myFiles),1):
-            print(f"{f+1}. {myFiles[f]}")
-        
-        return myFiles
+        return self.forDireccion(direc)      
