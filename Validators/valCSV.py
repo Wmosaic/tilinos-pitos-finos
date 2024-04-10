@@ -1,3 +1,4 @@
+#La direccion debe estar en el formato del validador, responsabilidad del programador
 def capCSV(self,direc) -> None:
         rowError,cuenta = 1,0
         with open(direc,encoding='UTF-8') as csvFile: 
