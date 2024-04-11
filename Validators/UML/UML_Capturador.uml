@@ -1,0 +1,28 @@
+Clase Capturador
+_______________
+-validador:const Validador
+_______________
+
+/*
+ * Los siguientes metodos son el constructor por omision, y 
+ * sobrecargado, respectivamente.
+ */
+
++Capturador()
++Capturador(Validador val)
+
++capInt(prompt:String):int
++capInt(prompt:String, limite:int):int
++capInt(prompt:String, limiteInferior:int, limiteSuperior:int):int
+
++capReal(prompt:String):double
++capReal(prompt:String, limite:double):double
++capReal(prompt:String, limiteInferior:double, limiteSuperior:double):double
+
++capNom(prompt:String):String
++capNom(prompt:String, limiteCaracteres:int):String
+
++capDate(prompt:String):String
+
++capFile():File
++capDir():String

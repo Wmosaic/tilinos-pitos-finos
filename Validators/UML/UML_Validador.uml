@@ -1,0 +1,9 @@
+Clase Validador
+_______________
+Sin atributos
+_______________
++isNum(cadena:String):boolean
++isNom(cadena:String):boolean
++isDate(cadena:String):boolean
++isDir(cadena:String):boolean
++isStr(cadena:String):boolean
