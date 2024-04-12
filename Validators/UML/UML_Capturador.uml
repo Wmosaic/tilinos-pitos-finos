@@ -1,6 +1,6 @@
 Clase Capturador
 _______________
--validador:const Validador
+-validador:const validator
 _______________
 
 /*
