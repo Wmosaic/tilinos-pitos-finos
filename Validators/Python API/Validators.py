@@ -199,7 +199,7 @@ class Validators:
         fecha_F = datetime.strptime(fecha,'%d/%m/%Y')     
         return datetime.strftime(fecha_F,'%d/%m/%Y') 
     
-    def cadeVaci(self, cadena):
+    def isStrVacio(self, cadena):
         if len(cadena) == 0 or cadena == None: return True
         else: return False
     
