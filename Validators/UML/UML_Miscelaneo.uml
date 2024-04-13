@@ -1,0 +1,7 @@
+Clase Miscelaneo
+_______________
+_______________
++stringInverter(cadena:String):String
++printNames(directorio:String):void
++printNames(directorio:String, incluirCarpetas:boolean):void
++getDirs(directorio:String):Path
