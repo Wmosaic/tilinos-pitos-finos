@@ -1,6 +1,7 @@
 from Validador import Validador
-
+from Capturas import Capturas
 objV = Validador()
+objC = Capturas(objV)
 
 miDireccion = input("Capture el directorio: ")
 print(objV.formatearCadena(miDireccion))
@@ -23,4 +24,16 @@ esCierto(objV.isDate("29/02/2005"))
 #Me devueleve la expresion booleana len(cadena) == 0 si no compara que sea None
 # retorna el True y si ninguna de las dos pues retorna false
 esCierto(objV.isStrVacio(''))
-objV.valCSV(objV.formatearCadena(miDireccion))
+
+
+micadena = objC.capCade("Capture su cadena: ")
+print(micadena)
+micadena = objC.capCade("Capture su cadena: ",10)
+print(micadena," y ",type(micadena))
+
+miNumeroReal = objC.capReal("Capture un numero real: ")
+print(miNumeroReal," y ", type(miNumeroReal))
+miNumeroReal = objC.capReal("Capture un numero real: ",0.0)
+print(miNumeroReal," y ", type(miNumeroReal))
+miNumeroReal = objC.capReal("Capture un numero real: ",1.0,10.0)
+print(miNumeroReal," y ", type(miNumeroReal))

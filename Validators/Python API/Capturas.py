@@ -4,7 +4,7 @@ from math import ceil
 
 class Capturas:
     #Contructor por omision
-    @dispatch(None)
+    @dispatch()
     def __init__(self) -> None:
         self.__objV = Validador()
         
@@ -47,7 +47,7 @@ class Capturas:
             print("No se aceptan letras")
             numReal = input(mensaje)
 
-        return numReal
+        return float(numReal)
     
     @dispatch(str,float)
     def capReal(self,mensaje,limValor) -> float:
@@ -58,7 +58,7 @@ class Capturas:
             print("El numero deber ser mayor o igual a "+str(limValor))
             numReal = self.capReal(mensaje)
         
-        return numReal
+        return float(numReal)
     
     @dispatch(str,float,float)
     def capReal(self,mensaje,limInferior,LimSuperior) -> float:
@@ -68,4 +68,4 @@ class Capturas:
             print("El numero debe estar entre: "+str(limInferior)+" y "+ str(LimSuperior))
             numReal = self.capReal(mensaje)
         
-        return numReal
+        return float(numReal)
