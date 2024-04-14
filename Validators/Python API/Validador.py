@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from os import listdir,abort
 
 class Validador:
@@ -13,10 +13,9 @@ class Validador:
     * Que da problemas a Python a la hora de trabajar rutas de acceso
     """
     
-    def __formatearCadena(self, cadena) -> str:
+    def formatearCadena(self, cadena) -> str:
         if '"' in cadena:
-                direccionNoComilla = cadena.replace('"','')
-                direcFormateada = direccionNoComilla.replace('\\','/')
+            direcFormateada = (cadena.replace('"','')).replace('\\','/')
         else:
             direcFormateada = cadena.replace('\\','/')
         
@@ -28,14 +27,18 @@ class Validador:
             return True
         except: return False
     
+    #Exis
     def isNom(self, cadena) -> bool:
+        #El metodo rsplit genera una lista de strings eliminando espacios
+        aux = True
         if len(cadena) != 0:
-            #El metodo rsplit genera una lista de strings eliminando secuencia de escape
             listaStrings = cadena.rsplit()
             for elementos in listaStrings: 
-                if elementos.isalpha(): return True
-                else: return False
+                if not(elementos.isalpha()): 
+                    aux = False
+                    break
         else: return False
+        return aux
     
     def isDate(self, fecha) -> bool:
         try:
@@ -50,15 +53,19 @@ class Validador:
     
     def isDir(self, cadena) -> bool:  
         try:
-            listdir(self.__formatearCadena(cadena))
+            listdir(self.formatearCadena(cadena))
             return True
         except FileNotFoundError: return False
         except OSError: return False
         except UnicodeDecodeError: return False
     
-    def isStrVacio(self, cadena):
-        if len(cadena) == 0 or cadena == None: return True
-        else: return False
+   
+    def isStrVacio(self, cadena) -> bool:
+       if isinstance(cadena, str):
+           return len(cadena) == 0
+       elif cadena == None:
+           return True
+       else: return False
     
     #La direccion ya debe estar validada responsabilidad del programador
     #Nota: Creo que no se desarrollada en C++ ni en Java 
