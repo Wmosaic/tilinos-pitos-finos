@@ -1,4 +1,5 @@
 from multipledispatch import dispatch
+from datetime import datetime
 from Validador import Validador
 from math import ceil
 
@@ -69,3 +70,52 @@ class Capturas:
             numReal = self.capReal(mensaje)
         
         return float(numReal)
+    
+    @dispatch(str)
+    def capInte(self,mensaje) -> int:
+        numEntero = input(mensaje)
+        
+        while not(self.__objV.isNum(numEntero)):
+            print("No se aceptan letras")
+            numEntero = input(mensaje)
+        
+        return abs(ceil(float(numEntero)))
+    
+    @dispatch(str,int)
+    def capInte(self,mensaje,limValor) -> int:
+        numEntero = self.capInte(mensaje)
+        
+        while numEntero < limValor:
+            print("El numero debe ser mayor o igual a "+str(limValor))
+            numEntero = self.capInte(mensaje)
+        #Si un chistoso captura -89.5 regresa 89 y no lo penaliza
+        return abs(ceil(float(numEntero))) 
+    
+    @dispatch(str,int,int)
+    def capReal(self,mensaje,limInferior,LimSuperior) -> int:
+        numEntero = self.capInte(mensaje)
+        
+        while not(limInferior <= numEntero <= LimSuperior):
+            print("El numero debe estar entre: "+str(limInferior)+" y "+ str(LimSuperior))
+            numReal = self.capInte(mensaje)
+        
+        return abs(ceil(float(numEntero)))
+    
+    def capDate(self,mensaje) -> str:
+        fecha = input(mensaje)
+        
+        while not(self.__objV.isDate(fecha)):
+            print("Fecha invalida")
+            fecha = input(mensaje)
+        
+        fechaFormateada = datetime.strptime(fecha,'%d/%m/%Y')
+        return datetime.strftime(fechaFormateada,'%d/%m/%Y')
+    #En proceso el capDire
+    def capDire(self,mensaje) -> str:
+        direccion = input(mensaje)
+        
+        while not(self.__objV.isDir(direccion)):
+            print("Ruta de acceso invalido")
+            direccion = input(mensaje)
+        
+        return self.__objV.formatearCadena(direccion)
