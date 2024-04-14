@@ -2,14 +2,6 @@
 #define VALIDATORS
 #include <string>
 
-/*
- * He hecho algunos de estos validadores usando expresiones regulares
- * es un metodo que no hemos usado antes asi que hay que tener cuidado,
- * no he testeado aun ninguna funcion, pero creo que deberian funcionar
- * de forma adecuada, eres libre de hacer cambios a tu discrecion.
- * -Mosaic
- */
-
 
 class Validators {
     public:
@@ -17,8 +9,7 @@ class Validators {
         bool isNom(std::string prueba);
         bool isDate(std::string prueba);
         bool isDir(std::string prueba);
-
-        bool stringVal(std::string prueba);
+        bool isStr(std::string prueba);
 
         int capInt(std::string mensaje);
         int capInt(std::string mensaje, const int limite);
@@ -41,7 +32,5 @@ class Validators {
 
         void printDirs(std::string directorio);
 
-        bool csvVal(std::string ruta); // Trabajo en proceso, ya existe la declaracion de 
-                                       // la funcion pero no esta completo el algoritmo.
 };
 #endif
