@@ -36,11 +36,12 @@
 
 	regresar buscarPatron(cadena, patron)
 
-
 4.0 (Privado) boolean isStr(cadena:String)
-    Si (cadena.longitud() != 0 || cadena != null)
-	    regresar Verdadero
-	De lo contrario regresar Falso
+    //La expresion es igual a un instanceof o isinstance
+    Si cadena pertenece a la clase String Entoces
+	regresar cadena.longitud() == 0
+    De otro modo cadena == null Entoces regresar Verdadero
+    Si no entoces Regresar Falso
 
 //Los algoritmos de archivos, como isDir() o getFiles(), se deben de 
 //Realizar individualmente para cada lenguaje, los algoritmos no 
