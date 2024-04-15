@@ -1,10 +1,10 @@
 from Validador import Validador
 from Capturas import Capturas
+from pathlib import Path
 objV = Validador()
 objC = Capturas(objV)
 
-miDireccion = input("Capture el directorio: ")
-print(objV.formatearCadena(miDireccion))
+
 
 def esCierto(valor) -> None:
     if valor:
@@ -25,7 +25,7 @@ esCierto(objV.isDate("29/02/2005"))
 # retorna el True y si ninguna de las dos pues retorna false
 esCierto(objV.isStrVacio(''))
 
-
+"""
 micadena = objC.capCade("Capture su cadena: ")
 print(micadena)
 micadena = objC.capCade("Capture su cadena: ",10)
@@ -37,3 +37,8 @@ miNumeroReal = objC.capReal("Capture un numero real: ",0.0)
 print(miNumeroReal," y ", type(miNumeroReal))
 miNumeroReal = objC.capReal("Capture un numero real: ",1.0,10.0)
 print(miNumeroReal," y ", type(miNumeroReal))
+"""
+ubiArchivo = objC.capDire()
+
+if Path(ubiArchivo).exists(): print("Si existe")
+else: print("No existe")

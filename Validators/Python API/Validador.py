@@ -1,16 +1,10 @@
 from datetime import datetime
-from os import listdir,abort
+from os import abort
+from pathlib import Path
 
 class Validador:
     def __init__(self) -> None:
         pass
-    
-    def formatearCadena(self, cadena) -> str:
-        if '"' in cadena:
-            direcFormateada = (cadena.replace('"','')).replace('\\','/')
-        else:
-            direcFormateada = cadena.replace('\\','/')
-        return direcFormateada
     
     def isNum(self, cadena) -> bool:
         try:
@@ -42,13 +36,11 @@ class Validador:
                 case _: return False
         except: return False
     
-    def isDir(self, cadena) -> bool:  
-        try:
-            listdir(self.formatearCadena(cadena))
-            return True
-        except FileNotFoundError: return False
-        except OSError: return False
-        except UnicodeDecodeError: return False
+    def isDir(self, cadena) -> bool:
+       if len(cadena) == 0: 
+           return False    
+       else:
+           return Path.is_dir(Path(cadena.replace('"','')))
     
     def isStrVacio(self, cadena) -> bool:
        if isinstance(cadena, str): return len(cadena) == 0
