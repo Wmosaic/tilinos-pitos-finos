@@ -15,10 +15,10 @@ bool Validador::isNum(std::string prueba){
 }
 
 bool Validador::isNom(std::string prueba){
-    std::string patron{"^[A-Za-z]+$"};
+    std::string patron{"^(([A-Za-z]?)| )+$"};
     std::basic_regex<char> patronRegex{patron};
 
-    return std::regex_search(prueba, patronRegex);
+    return std::regex_search(prueba, patronRegex) && (prueba.length() != 0);
 }
 
 bool Validador::isDate(std::string prueba){
