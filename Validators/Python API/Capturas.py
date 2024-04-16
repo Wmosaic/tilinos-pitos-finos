@@ -3,7 +3,7 @@ from datetime import datetime
 from Validador import Validador
 from math import ceil
 from pathlib import Path
-import os
+from os import listdir
 
 class Capturas:
     #Contructor por omision
@@ -112,23 +112,25 @@ class Capturas:
         
         fechaFormateada = datetime.strptime(fecha,'%d/%m/%Y')
         return datetime.strftime(fechaFormateada,'%d/%m/%Y')
-    #En proceso el capDire
-    def capDire(self,ext=".csv") -> str:
+    
+    def capDire(self) -> str:
         print("Nota: usa Shift+Ctrl+C para la ruta de acceso (En windows)")
-        #Ese comando cambia para Mac por que la tecla tiene otro nombre pero por ahora puro windows
         direccion = input("Capture la ruta de acceso: ")
         
         while not(self.__objV.isDir(direccion)):
             print("Ruta de acceso invalido")
             direccion = input("Capture la ruta de acceso: ")
         
-        myDireccion = os.listdir(Path(direccion).as_posix().replace('"',''))
-        myFiles = [file for file in myDireccion 
-                  if file.lower().endswith(ext)]
+        return Path(direccion).as_posix().replace('"','')
+    
+    @dispatch(str,str)
+    def capFile(self,direccion,ext=".csv") -> Path:
+        misfiles = listdir(direccion)
+        myNewFiles = [ file for file in misfiles if file.lower().endswith(ext) ]
         
-        if len(myFiles) != 0:
-            for i in range(0,len(myFiles),1): print("{:5d}.{}".format(i+1,myFiles[i]))
-            ind = self.capInte("Seleccione su archivo por numero: ",1,len(myFiles))
-            return self.__objV.formatearCadena(direccion)+"/"+myFiles[ind-1]
-        else: return "No hay Archivos"  
-        #Validacion ingenua esta mamada si no se usa adecuada da errores  
+        for i in range(0,len(myNewFiles),1):
+            print("{:d}.{}".format(i+1,myNewFiles[i]))
+        
+        index = self.capInte("Seleccione su archivo por numero: ",1,len(myNewFiles))
+        
+        return Path(direccion+"/"+myNewFiles[index-1])

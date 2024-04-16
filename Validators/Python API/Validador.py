@@ -1,5 +1,5 @@
 from datetime import datetime
-from os import abort
+from os import listdir,abort
 from pathlib import Path
 
 class Validador:
@@ -14,9 +14,10 @@ class Validador:
     
     def isNom(self, cadena) -> bool:
         #El metodo rsplit genera una lista de strings eliminando espacios
+        #Validar espacios
         aux = True
         if len(cadena) != 0:
-            listaStrings = cadena.rsplit()
+            listaStrings = (cadena.rsplit())
             for elementos in listaStrings: 
                 if not(elementos.isalpha()): 
                     aux = False
@@ -36,11 +37,14 @@ class Validador:
                 case _: return False
         except: return False
     
+    #Mejorar el validador traer mas excepciones
     def isDir(self, cadena) -> bool:
-       if len(cadena) == 0: 
-           return False    
-       else:
-           return Path.is_dir(Path(cadena.replace('"','')))
+       try: 
+            aux = Path(cadena).as_posix().replace('"','')
+            len(aux) == 0
+            listdir(aux)
+            return True
+       except: return False
     
     def isStrVacio(self, cadena) -> bool:
        if isinstance(cadena, str): return len(cadena) == 0
