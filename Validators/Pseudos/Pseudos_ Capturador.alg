@@ -20,7 +20,7 @@
 
 	regresar variable.convertidoANumero()
 
-1.1 (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, lim:int)
+1.1.A (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, lim:int)
 	aux = ""
     num = ?
 	Empezar a hacer
@@ -32,7 +32,14 @@
 
 	regresar variable.convertidoANumero()
 
-1.2 (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, limI:int, limS:int)
+1.1.B (Publico-Sobrecargado) (int, double) capNumero(mensaje:String, lim:int)
+    aux = ?
+	Empezar a hacer
+		aux = capNumero(mensaje)
+	Mientras (aux >= lim)
+	Regresar aux;
+
+1.2.A (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, limI:int, limS:int)
 	aux = ""
     num = ?
 	Empezar a hacer
@@ -40,9 +47,16 @@
 		    imprimir mensaje
 		    leer aux
 		num = aux.convertidoANumero()
-	Mientras (limiteSuperior <= num <= limiteInferior)
+	Mientras (limS <= num <= limI)
 	
 	regresar variable.convertidoANumero()
+
+1.2.B (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, limI:int, limS:int)
+    aux = ?
+	Empezar a hacer
+		aux = capNumero(mensaje)
+	Mientras (limS <=aux >= limI)
+	Regresar aux;
 
 2.0 (Publico) (String) capNom(mensaje:String)
 	imprimir mensaje

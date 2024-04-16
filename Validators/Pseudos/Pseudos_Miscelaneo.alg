@@ -1,3 +1,11 @@
+0.0 CONSTRUCTOR  Miscelaneo()
+    Validador val
+    this.validator = val
+
+0.1 CONSTRUCTOR Miscelaneo(Validador val)
+    this.validator = val
+
+
 1.0 (Publico) String invertirCadena(cadena:String) 
     String aux = ""
 	Para i = (cadena.longitud() - 1); hasta i == 0; con paso -1 Empezar
