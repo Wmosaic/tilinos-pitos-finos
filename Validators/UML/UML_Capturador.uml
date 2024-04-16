@@ -25,4 +25,4 @@ _______________
 +capDate(prompt:String):String
 
 +capFile():File
-+capDir():String
++capDir():Path

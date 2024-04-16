@@ -1,7 +1,7 @@
 #ifndef MISCELANEO
 #define MISCELANEO  
-#include"Validador.h"
 
+#include"Validador.h"
 
 class Miscelaneo{
 private:
