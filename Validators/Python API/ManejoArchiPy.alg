@@ -13,15 +13,6 @@
 //El primer argumento es el caracter a remplazar y el segundo
 //El caracter con el que se remplazara el primer argumento
 
-1. (Publico) (String) formatearCadena(direccion: string)
-    
-    Si '"' esta en direccion Entoces
-        direccionNoComilla = (direccion.replace('"','')).replace('\\','/')
-    De lo Contrario
-        direccionFormateada = direccion.replace('\\','/')
-
-    return direccionFormateada
-
 /* 
 *  En python la biblioteca OS tiene un metodo llamado listdir()
 *  como argumento tiene una cadena donde busca y lee los archivos
@@ -29,35 +20,72 @@
 *  con todos los nombres de los archivo leeídos
 */
 
-2. (Privado) (boolean) isDirec(direccion: string)
+1. (Privado) (boolean) isDirec(direccion: string)
     Intentar
-        listdir(direccion)
+        direccion = direccion.replazar('\\' a '/')
+        generarListaNombreArchivos(direccion)
         regresar Verdadero
     Excepcion 
         regresar Falso
 
-3. (Publico) (string) capDireccion(mensaje: string)
+2. (Publico) (string) capDireccion()
     Error = "Hubo un problema con la ruta de acceso, verifique por favor"
-    Imprimir mensaje
+    Imprimir "Capture su ruta de Acceso w: "
     leer verdDireccion
 
-    Mientras No(isDirec(forDireccion(verdDireccion))) Empezar
+    Mientras No(isDirec(verdDireccion)) Empezar
         Imprimir Error
         leer verdDireccion
     Terminar Mientras
     
-    Regresar forDireccion(verdDireccion)+'/'
+    Regresar verdDireccion //La direccion obivaimente ya debe estar Formateada
 
-//Mejora de printsDir() la razon por la cual mandar un arreglo/lista de los nombres de los archivos
+/*
+* Aqui Siento  y como sugerencia que lo mejor seria sobrecargar este método 
+* Asi hacerlo mas versatil si el programadaro quiere 
+* trabajar con una ruta de acceso "Fija" puede optar por 
+* capFiles(direccion,ext) y asi acoplando mas los metodos
+* y nos ahorramos el getDirs y el printNames
+*/
 
-4. (Publico) (lista:String) getFiles(direccion: string) 
-    myFiles = listdir(direccion)
+3. (Publico) (Path) capFiles(direccion: string, ext: string) 
+    newFiles = []
+    myFiles = generarListaNombreArchivos(direccion)
+
+    //Con esta logica se usa para filtrar los archivos con la extension 
+    //En Python usare el metodo predifinido en el lenguaje *endswith(ext)*
+    Para file en myFiles Empezar 
+        Si f termina con la extencion "ext"
+            newFiles.agregar(f)
+    Terminar Para
+
+    Para i in rango(0,len(newFiles),1)
+        imprimir i+1+"."+newFiles[i]
+    
+    Imprimir "Seleccione su archivo por numero: Desde 1 hasta "+len(newFiles)
+    leer index
+
+    regresar Path(direccion+"/"+myFiles[index-1])
+
+3.1 (Publico-Sobrecargado) (Path) capFiles(ext: string) 
+    direccion = self.isDirec()
+    myFiles =  generarListaNombreArchivos(direccion)
+
+    //Con esta logica se usa para filtrar los archivos con la extension 
+    //En Python usare el metodo predefinido en el lenguaje *endswith(ext)*
+    Para file en myFiles Empezar 
+        Si f termina con la extencion "ext"
+            newFiles.agregar(f)
+    Terminar Para
 
     Para f en rango(0,len(myFiles),1) Empezar
         Imprimir f+1 + "." +myFiles[f]
     Terminar Para
 
-    regresar myFiles
+    Imprimir "Seleccione su archivo por numero: Desde 1 hasta "+len(myFiles)
+    leer index
+
+    regresar Path(myFiles[index-1]) 
 
 /*
 * El funcionamiento de este metodo hace que lea cada elemento de una linea
@@ -70,7 +98,7 @@
 
 //El metodo rstrip y split hace dividir la línea por comas y eliminar espacios en blanco al final
 
-5. (Publico) (Vacio) valCSV(direccion: String)
+4. (Publico) (Vacio) valCSV(direccion: String)
     rowError = 1
     cuenta = 0
     Archivo =  ArchivoAbrir(direccion)
