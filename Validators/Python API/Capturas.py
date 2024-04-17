@@ -1,9 +1,15 @@
 from multipledispatch import dispatch
 from datetime import datetime
 from Validador import Validador
-from math import ceil
+from math import trunc
 from pathlib import Path
 from os import listdir
+
+"""
+LEER IMPORTENTE: SI QUIERES HACER CORRECTO USO DE ESTA CLASE DEBES ISNTALAR DESDE EL CMD
+EL "multipledispatch" CON ESTE COMANDO: pip3 install multipledispatch SOLO HACES COPIA Y PEGA 
+Y LISTO
+"""
 
 class Capturas:
     #Contructor por omision
@@ -11,9 +17,6 @@ class Capturas:
     def __init__(self) -> None:
         self.__objV = Validador()
         
-    #Constructor sobrecargado que acepta un objeto
-    #Probablemte al instanciar se debe envolver
-    #En la clase object de Python o creo que no w
     @dispatch(object)
     def __init__(self,objetoValidador) -> None:
         self.__objV = objetoValidador
@@ -30,10 +33,12 @@ class Capturas:
     
     @dispatch(str,int)
     def capCade(self,mensaje,limChar) -> str:
+        #Esto es una porqueria pero en caso de que un programador chistoso ponga un entero negativo
+        #Abra un ciclo infinito por naturaleza del isNom(), entoces si detecta un negativo lo hace Positivo
+        #Esto se podria lanzar con RisesError quiza para solucionar problemas.
+        if limChar < 0: limChar = limChar*-1 #Se proponen una validacion super Rapida
+        if limChar == 0: limChar = limChar+1
         mensError = "El numero de caracteres debe ser menor a: "+str(limChar)
-        #Hago referencia al metodo "Original" para reutilizar logica
-        #No se si es la forma mas eficente pero es mas legible sobre 
-        #todo en el capReal y capInte
         cad = self.capCade(mensaje)
         
         while not(len(cad) <= limChar):
@@ -80,8 +85,8 @@ class Capturas:
         while not(self.__objV.isNum(numEntero)):
             print("No se aceptan letras")
             numEntero = input(mensaje)
-        #Si un chistoso captura -89.5 regresa 89 y no lo penaliza
-        return abs(ceil(float(numEntero)))
+            
+        return trunc(float(numEntero))
     
     @dispatch(str,int)
     def capInte(self,mensaje,limValor) -> int:
@@ -114,6 +119,8 @@ class Capturas:
         return datetime.strftime(fechaFormateada,'%d/%m/%Y')
     
     def capDire(self) -> str:
+        #Validacion de Directorios Vacios o que no se encontro 
+        #Archivos con la extension queda PENDIENTE
         print("Nota: usa Shift+Ctrl+C para la ruta de acceso (En windows)")
         direccion = input("Capture la ruta de acceso: ")
         
@@ -123,8 +130,23 @@ class Capturas:
         
         return Path(direccion).as_posix().replace('"','')
     
+    @dispatch(str)
+    def capFile(self,ext) -> Path:
+        rutaDeAcceso = self.capDire()
+         
+        misfiles = listdir(rutaDeAcceso)
+        myNewFiles = [ file for file in misfiles if file.lower().endswith(ext) ]
+        
+        for i in range(0,len(myNewFiles),1):
+            print("{:d}.{}".format(i+1,myNewFiles[i]))
+        
+        index = self.capInte("Seleccione su archivo por numero: ",1,len(myNewFiles))
+        
+        return Path(rutaDeAcceso+"/"+myNewFiles[index-1])
+        
+    
     @dispatch(str,str)
-    def capFile(self,direccion,ext=".csv") -> Path:
+    def capFile(self,direccion,ext) -> Path:
         misfiles = listdir(direccion)
         myNewFiles = [ file for file in misfiles if file.lower().endswith(ext) ]
         

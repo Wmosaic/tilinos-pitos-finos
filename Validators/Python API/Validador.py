@@ -1,6 +1,6 @@
 from datetime import datetime
 from os import listdir,abort
-from pathlib import Path
+from pathlib import PureWindowsPath
 
 class Validador:
     def __init__(self) -> None:
@@ -13,16 +13,17 @@ class Validador:
         except: return False
     
     def isNom(self, cadena) -> bool:
-        #El metodo rsplit genera una lista de strings eliminando espacios
-        #Validar espacios
+        
+        listaStrings = cadena.rsplit()
         aux = True
-        if len(cadena) != 0:
-            listaStrings = (cadena.rsplit())
+        
+        if len(cadena) != 0 and len(listaStrings) != 0:
             for elementos in listaStrings: 
-                if not(elementos.isalpha()): 
+                if not(elementos.isalpha() or elementos.isspace()): 
                     aux = False
                     break
         else: return False
+        
         return aux
     
     #Dependiendo de la longitud de la fecha capturada se extree el año 
@@ -39,10 +40,21 @@ class Validador:
     
     #Mejorar el validador traer mas excepciones
     def isDir(self, cadena) -> bool:
+        #La ruta de Acceso tiene un Match que sirve para que no se den
+        #Entrada para esos caracterers que por Enter da un '.' y el listdir
+        #Acepta '/' para abrir directorios entoces ya da false en caso de 
+        #Siniestros
+        
        try: 
-            aux = Path(cadena).as_posix().replace('"','')
-            len(aux) == 0
-            listdir(aux)
+           #Nota .as_posix() Cambia una ruta de acceso de windows a Unix
+           #Cuando copias el Path de una carpeta de windows salen comillas
+           #Entoces Replace se encarga de quitarlas
+            rutaAcceso = PureWindowsPath(cadena).as_posix().replace('"','')
+            match rutaAcceso:
+                case '.': return False
+                case '/': return False
+                case  '': return False
+            listdir(rutaAcceso)
             return True
        except: return False
     

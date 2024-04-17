@@ -1,16 +1,29 @@
 from Validador import Validador
 from Capturas import Capturas
-from pathlib import Path
 objV = Validador()
 objC = Capturas(objV)
 
 
+
+pene = objC.capCade("Capture su Pene: ")
+print(pene,type(pene))
 
 def esCierto(valor) -> None:
     if valor:
         print("Es cierto")
     else: 
         print("Es falso")
+    
+Direc =  objC.capDire()
+print(Direc,type(Direc))
+print()
+Direc =  objC.capFile("C:/Users/Luis.Luisss/Documentos/Programacion/POO/Copias de seguridad/Empleados",".csv")
+print(Direc,type(Direc))
+print(Direc.is_file())
+print()
+Direc = objC.capFile(".csv")
+print(Direc,type(Direc))
+print(Direc.is_file())
 
 #Existe error en el is Nom regresa el valor booleano del ultimo valor comparadao
 #Osea Pancho mat3o vi//a sex0 niño Gáy regresa True comparo el Gáy
@@ -37,10 +50,11 @@ miNumeroReal = objC.capReal("Capture un numero real: ",0.0)
 print(miNumeroReal," y ", type(miNumeroReal))
 miNumeroReal = objC.capReal("Capture un numero real: ",1.0,10.0)
 print(miNumeroReal," y ", type(miNumeroReal))
-"""
+
 ubiArchivo = objC.capDire()
 
 if Path(ubiArchivo).exists(): print("Si existe")
 else: print("No existe")
 A = objC.capCade("sEXO: ")
 print(A,type(A))
+"""
