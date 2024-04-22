@@ -1,0 +1,89 @@
+1. Meta()
+   Imprimir "Capturar y desplegar una lista de monedas"
+   Imprimir "Presentes dentro de un monedero totalizando"
+   Imprimir "las monedas presentes dentro de cada divisas"
+
+2.1 CapturaManual()
+   obj_mone = nuevo Moneda()
+   arreglo[50] = obj_mone
+   guarda_can[50] 
+   iterador = 0
+
+   Mientras iterador < arreglo.lenght() empezar
+    Imprimir "Capture la divisa de la moneda: "
+    leer div
+    Si div.minuscula == 'fin' Entonces Romper
+    Imprimir "Capture el valor de la moneda: "
+    leer val  
+    Imprimir "Capturar el escudo de la moneda: "
+    leer esc
+    Imprimir "Cuantas veces son del mismo tipo? "
+    leer cantidad
+    obj_mone = nuevo Moneda()
+    arreglo[iterador] = obj_mone
+    arreglo[iterador] = div
+    arreglo[iterador] = val
+    arreglo[iterador] = esc
+    guarda_can[iterador] = cantidad 
+   Terminar
+
+2.2. CapturaFicheros()
+	cuenta = 0
+	Articulo obj_a = Nuevo Moneda()
+	Moneda lista[50]
+	archivo = Abrir(_...Direccion.txt)
+	monedas = archivo.leer()
+	
+	para i = 0; i < monedas; i++ empezar
+		lista[Cuenta] = monedas[i]
+		Moneda obj_a = Nuevo Moneda
+		arreglo = obj_a
+		cuenta++		
+	Terminar
+	archivo.Cerrar()	
+	regresar cuenta
+
+3.1 confiDivisas()
+   limS = 0
+
+   Para i = 0 hasta iterador i en 1 a 1
+      Setdivisas[i] = arreglo[i]
+   Terminar
+
+   tem_Div = Setdivisas.Quitar_ElementosRepetidos()
+
+   Para i = 0 hasta tem_Div.len() i en 1 en 1
+      Setdivisas[limS] = tem_Div[i]
+      limS++
+   Terminar
+   regresar Setdivisas[limS]
+
+3.2 calcu()
+   Setdivisas[] = confiDivisas()
+   Para j = 0; j < limS; j++ empezar
+      dineros = 0
+      Para i = 0; i < iterador; i ++
+         Si Setdivisas[j] == arreglo[i].MetodoObtenerDivisa()
+            dinero += guarda_can[i] * arreglo[i].MetodoObtenerValor()
+      cuenta_val[j] = dinero
+   Terminar
+
+4. Salida()
+  Para i = 0; i < arreglo.longitud(); i++
+   Imprimir "La divisa "+arreglo[i].MetodoObtenerDivisa()
+   Imprimir "El valor "+arreglo[i].MetodoObtenerValor()
+   Imprimir "El escudo "+arreglo[i].MetodoObtenerEscudo()
+   Imprimir "El año "+arreglo[i].MetodoObtenerAño()
+   Imprimir "De estas caracterizticas hubo: "guarda_can[i]
+   Imprimir "Con un valor total de: "+cuenta_val[i]
+
+5. Navegabilidad()
+  Aff = "S"
+  Mientras Aff == "S" O Aff == "s"
+   meta()
+   data()
+   Calc()
+   salida()
+   Imprimir "Otros datos? "
+   leer Aff 
+ Terminar
