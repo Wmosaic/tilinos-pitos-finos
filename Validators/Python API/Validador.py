@@ -1,6 +1,5 @@
 from datetime import datetime
-from os import listdir,abort
-from pathlib import PureWindowsPath
+from os import abort
 
 class Validador:
     def __init__(self) -> None:
@@ -13,7 +12,6 @@ class Validador:
         except: return False
     
     def isNom(self, cadena) -> bool:
-        
         listaStrings = cadena.rsplit()
         aux = True
         
@@ -38,34 +36,11 @@ class Validador:
                 case _: return False
         except: return False
     
-    #Mejorar el validador traer mas excepciones
-    def isDir(self, cadena) -> bool:
-        #La ruta de Acceso tiene un Match que sirve para que no se den
-        #Entrada para esos caracterers que por Enter da un '.' y el listdir
-        #Acepta '/' para abrir directorios entoces ya da false en caso de 
-        #Siniestros
-        
-       try: 
-           #Nota .as_posix() Cambia una ruta de acceso de windows a Unix
-           #Cuando copias el Path de una carpeta de windows salen comillas
-           #Entoces Replace se encarga de quitarlas
-            rutaAcceso = PureWindowsPath(cadena).as_posix().replace('"','')
-            match rutaAcceso:
-                case '.': return False
-                case '/': return False
-                case  '': return False
-            listdir(rutaAcceso)
-            return True
-       except: return False
-    
     def isStrVacio(self, cadena) -> bool:
        if isinstance(cadena, str): return len(cadena) == 0
        elif cadena == None: return True
        else: return False
     
-    #La direccion ya debe estar validada responsabilidad del programador
-    #Nota: Creo que no se desarrollada en C++ ni en Java por lo tanto es metodo dispar
-    #Entre los demas lenguajes hasta ahora
     def valCSV(self, direccion) -> None:
          rowError,cuenta = 1,0
          with open(direccion,encoding='UTF-8') as csvFile: 

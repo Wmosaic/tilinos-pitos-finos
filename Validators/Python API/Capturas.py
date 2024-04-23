@@ -2,8 +2,6 @@ from multipledispatch import dispatch
 from datetime import datetime
 from Validador import Validador
 from math import trunc
-from pathlib import Path
-from os import listdir
 
 """
 LEER IMPORTENTE: SI QUIERES HACER CORRECTO USO DE ESTA CLASE DEBES ISNTALAR DESDE EL CMD
@@ -117,42 +115,3 @@ class Capturas:
         
         fechaFormateada = datetime.strptime(fecha,'%d/%m/%Y')
         return datetime.strftime(fechaFormateada,'%d/%m/%Y')
-    
-    def capDire(self) -> str:
-        #Validacion de Directorios Vacios o que no se encontro 
-        #Archivos con la extension queda PENDIENTE
-        print("Nota: usa Shift+Ctrl+C para la ruta de acceso (En windows)")
-        direccion = input("Capture la ruta de acceso: ")
-        
-        while not(self.__objV.isDir(direccion)):
-            print("Ruta de acceso invalido")
-            direccion = input("Capture la ruta de acceso: ")
-        
-        return Path(direccion).as_posix().replace('"','')
-    
-    @dispatch(str)
-    def capFile(self,ext) -> Path:
-        rutaDeAcceso = self.capDire()
-         
-        misfiles = listdir(rutaDeAcceso)
-        myNewFiles = [ file for file in misfiles if file.lower().endswith(ext) ]
-        
-        for i in range(0,len(myNewFiles),1):
-            print("{:d}.{}".format(i+1,myNewFiles[i]))
-        
-        index = self.capInte("Seleccione su archivo por numero: ",1,len(myNewFiles))
-        
-        return Path(rutaDeAcceso+"/"+myNewFiles[index-1])
-        
-    
-    @dispatch(str,str)
-    def capFile(self,direccion,ext) -> Path:
-        misfiles = listdir(direccion)
-        myNewFiles = [ file for file in misfiles if file.lower().endswith(ext) ]
-        
-        for i in range(0,len(myNewFiles),1):
-            print("{:d}.{}".format(i+1,myNewFiles[i]))
-        
-        index = self.capInte("Seleccione su archivo por numero: ",1,len(myNewFiles))
-        
-        return Path(direccion+"/"+myNewFiles[index-1])
