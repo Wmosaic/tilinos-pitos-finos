@@ -31,7 +31,7 @@ class utilPyFile:
         if len(myFiles) == 0: abort()
         return myFiles
             
-    def capDire(self) -> str:
+    def capDir(self) -> str:
         print("Nota: usa Shift+Ctrl+C para la ruta de acceso (En windows)")
         direccion = input("Capture la ruta de acceso: ")
         
