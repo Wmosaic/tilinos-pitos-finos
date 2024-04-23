@@ -4,7 +4,7 @@
         Para Archivo arch en iterador_de_directorios(ruta)
             Escribir(archivo.ruta.nombre() + "\n")
 
-1.1 (Publico) (void) printNames(rutaStr:String)
+1.1 (Publico) (void) printNames(rutaStr:String, filtrar: boolean)
     Si (validador.isDir(rutaStr))     
         Path ruta = rutaStr
         Para Archivo arch en iterador_de_directorios(ruta)
