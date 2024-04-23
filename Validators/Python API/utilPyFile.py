@@ -1,12 +1,12 @@
 from Capturas import Capturas
 from multipledispatch import dispatch
-from os import listdir
+from os import listdir,abort
 from pathlib import *
 
 class utilPyFile:
     def __init__(self) -> None:
          self.__objC = Capturas()
-
+         
     def isDir(self, cadena) -> bool:
         #La ruta de Acceso tiene un Match que sirve para que no se den
         #Entrada para esos caracterers que por Enter da un '.' y el listdir
@@ -26,6 +26,11 @@ class utilPyFile:
             return True
        except: return False
     
+    def areFiles(self, direccion, ext) -> list:
+        myFiles = [file for file in listdir(direccion) if file.lower().endswith(ext) and Path(file).is_file()]
+        if len(myFiles) == 0: abort()
+        return myFiles
+            
     def capDire(self) -> str:
         print("Nota: usa Shift+Ctrl+C para la ruta de acceso (En windows)")
         direccion = input("Capture la ruta de acceso: ")
@@ -40,25 +45,22 @@ class utilPyFile:
     def capFile(self,ext) -> Path:
         rutaDeAcceso = self.capDire()
          
-        misfiles = listdir(rutaDeAcceso)
-        myNewFiles = [ file for file in misfiles if file.lower().endswith(ext) ]
+        myFiles = self.areFiles(rutaDeAcceso,ext)
         
-        for i in range(0,len(myNewFiles),1):
-            print("{:d}.{}".format(i+1,myNewFiles[i]))
+        for i in range(0,len(myFiles),1):
+            print("{:d}.{}".format(i+1,myFiles[i]))
         
-        index = self.__objC.capInte("Seleccione su archivo por numero: ",1,len(myNewFiles))
+        index = self.__objC.capInte("Seleccione su archivo por numero: ",1,len(myFiles))
         
-        return Path(rutaDeAcceso+"/"+myNewFiles[index-1])
-        
+        return Path(rutaDeAcceso+"/"+myFiles[index-1])
     
     @dispatch(str,str)
     def capFile(self,direccion,ext) -> Path:
-        misfiles = listdir(direccion)
-        myNewFiles = [ file for file in misfiles if file.lower().endswith(ext) ]
+        myFiles = self.areFiles(direccion,ext)
         
-        for i in range(0,len(myNewFiles),1):
-            print("{:d}.{}".format(i+1,myNewFiles[i]))
+        for i in range(0,len(myFiles),1):
+            print("{:d}.{}".format(i+1,myFiles[i]))
         
-        index = self.capInte("Seleccione su archivo por numero: ",1,len(myNewFiles))
+        index = self.capInte("Seleccione su archivo por numero: ",1,len(myFiles))
         
-        return Path(direccion+"/"+myNewFiles[index-1])
+        return Path(direccion+"/"+myFiles[index-1])

@@ -120,3 +120,15 @@
 
     imprimir "No hay errores en su archivo :D"
     Archivo.Cerrar()
+
+//Direcciones ya validas obivaimente
+5. (Publico) (LISTA) areFiles(direccion: string, ext: string)
+    newArchivos = []
+    misFiles = generarListaNombreArchivos(direccion)
+
+    Para archivos en misFiles Entoces:
+        Si archivo tiene la extencion "ext" Y se puede AbrirComoArchivo Entoces
+            newArchivos.Agregar(archivo)
+    
+    Si len(newArchivos) == 0: InterrumpirPrograma
+    De lo contrario Regresar newArchivos
