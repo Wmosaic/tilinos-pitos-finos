@@ -28,8 +28,6 @@
         patron += extension + $
         Patron patronRegex = patron
 
-
-
         Para Archivo arch en iterador_de_directorios(ruta)
             Si arch.es_regular() Y buscarPatron(arch.ruta(), patronRegex)
                 rutas.agregar(arch.ruta())

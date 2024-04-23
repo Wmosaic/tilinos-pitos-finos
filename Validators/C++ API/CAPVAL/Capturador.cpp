@@ -1,5 +1,6 @@
 #include "Capturador.h"
 #include <iostream>
+namespace fs = std::filesystem;
 
 Capturador::Capturador() : validator(){}
 
@@ -85,4 +86,15 @@ std::string Capturador::capNom(std::string mensaje, int limiteCaracteres){
         aux = capNom(mensaje);
     } while (aux.length() >= limiteCaracteres);
     return aux;
+}
+
+fs::path Capturador::capDir(){
+    std::string auxTest;
+    
+    std::cout << "Ingrese la ruta al directorio deseado: \n";
+    std::getline(std::cin, auxTest);
+
+    while(!validator.isDir(auxTest)){
+        std::cout << "Ingrese una ruta valida";
+    }
 }
