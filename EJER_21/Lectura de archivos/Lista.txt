@@ -1,0 +1,29 @@
+Manzanas,Kg,5,2.50
+Camisetas,Mts,3,12.99
+Leche,Litros,8,1.75
+Huevos,Docenas,2,3.50
+Pan,Kg,10,1.20
+Zapatos,Pares,4,25.99
+Arroz,Kg,6,1.80
+Camisetas,Mts,5,10.99
+Jabón,Unidades,12,0.99
+Plátanos,Kg,7,1.75
+Cerveza,Litros,15,2.50
+Pantalones,Pares,3,29.99
+Papel Higiénico,Rollos,20,0.50
+Naranjas,Kg,9,1.50
+Calcetines,Pares,8,3.99
+Aceite,Litros,6,4.50
+Galletas,Paquetes,10,2.25
+Cebollas,Kg,8,0.75
+Pasta,Kg,5,1.25
+Refrescos,Litros,12,1.20
+Queso,Kg,4,6.99
+Cepillos de Dientes,Unidades,15,1.50
+Platos,Unidades,7,2.99
+Tomates,Kg,6,2.00
+Café,Kg,3,8.50
+Servilletas,Paquetes,10,1.00
+Pescado,Kg,4,12.75
+Papel de Cocina,Rollos,8,1.25
+Jabón de Lavandería,Unidades,5,4.50
