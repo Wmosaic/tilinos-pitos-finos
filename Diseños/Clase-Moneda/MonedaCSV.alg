@@ -85,6 +85,7 @@
 3.2 Calculos()
    String newDivisas[] = setDivisas()
    (float) cuenta_val[50]
+   (float) subtotal[50]
 
    Para j = 0; j < cuentaDivisaFiltrada; j++ empezar
       dineros = 0
@@ -93,12 +94,17 @@
             dinero += repetecionMoneda[i] * listaMoneda[i].MetodoObtenerValor()
       cuenta_val[j] = dinero //El monto totoal de cada Divisa
    Terminar
+   
+   Para k = 0;k < cuenta; k++ empezar
+	subtotal[k] = repetecionMoneda[i] * listaMoneda[i].MetodoObtenerValor() 
+   
 
 4. Salida()
 	String newDivisas[] = setDivisas()
 	Imprimir "Su monedero: "
 	Para i = 0; i < Cuenta; i++ Empezar
 		Imprimir listaMoneda[i].MetodoObtenerCadena()
+		Imprimir "El subtotal: "+subtotal[k]
 		Imprimir "-------------------"
 	Terminar ~~
 	
