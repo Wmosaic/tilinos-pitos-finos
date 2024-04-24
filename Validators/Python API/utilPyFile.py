@@ -61,6 +61,6 @@ class utilPyFile:
         for i in range(0,len(myFiles),1):
             print("{:d}.{}".format(i+1,myFiles[i]))
         
-        index = self.capInte("Seleccione su archivo por numero: ",1,len(myFiles))
+        index = self.__objC.capInte("Seleccione su archivo por numero: ",1,len(myFiles))
         
         return Path(direccion+"/"+myFiles[index-1])
