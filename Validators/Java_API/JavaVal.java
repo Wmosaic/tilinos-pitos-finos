@@ -1,4 +1,3 @@
-package Validators.Java_API;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,11 +33,11 @@ class JavaVal {
    }
 
    /**Método para validar la fecha ingresada*/
-   @SuppressWarnings("unused")
    public boolean isDate(String cadena) {
       try {
          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
          sdf.setLenient(false);
+         @SuppressWarnings("unused")
          Date fecha = sdf.parse(cadena);
          return true;
       } catch (ParseException e) {
@@ -48,10 +47,11 @@ class JavaVal {
 
    /**Método para validar cadenas de texto vaciás o nulas*/
    public boolean isStr(String cadena) {
-      if (cadena == null) {
-         return false;
+      if (cadena == null || cadena.contains(" ") || cadena.isEmpty()){
+         System.out.println("La cadena de texto esta vaciá");
+         return true;
       }
-      return !cadena.isEmpty();
+      return false;
    }
 
    /**Método para validar un directorio*/
@@ -61,15 +61,6 @@ class JavaVal {
          System.out.println("El directorio no es valido");
          return false;
       }
-      return true;
-   }
-
-   /** Método para validar si existen archivos dentro de un directorio*/
-   public boolean isFile(File[] cadena) {
-      if (cadena != null && cadena.length > 0) {
-         return false;
-         }
-      System.out.println("No hay archivos en este directorio");
       return true;
    }
 

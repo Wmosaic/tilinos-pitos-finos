@@ -1,16 +1,17 @@
-package Validators.Java_API;
 import javax.swing.*;
 import java.io.File;
 
-class JavaCap{
-   private JavaVal validator;
+//Todos los capturadores hacen uso del JOptionPane
+
+public class JavaCap {
+   private JavaVal val;
 
    /**Constructores para inicializar los validadores dependiendo el contexto*/
    JavaCap(){
-      this.validator = new JavaVal();
+      this.val = new JavaVal();
    }
    JavaCap(JavaVal val){
-      this.validator = val;
+      this.val = val;
    }
 
 
@@ -18,7 +19,7 @@ class JavaCap{
    int capInt(String mensaje){
       String aux = JOptionPane.showInputDialog(null, mensaje);
 
-      while(!validator.isNum(aux)){
+      while(!val.isNum(aux)){
          aux = JOptionPane.showInputDialog(null, mensaje);
       }
       return (int) Float.parseFloat(aux);
@@ -26,37 +27,28 @@ class JavaCap{
 
    /**Método para capturar solamente números enteros con un limite determinado*/
    int capInt(String mensaje, int lim){
-      double num;
-      do {
-         String aux = "";
-         while (!validator.isNum(aux)) {
-            aux = JOptionPane.showInputDialog(null,
-                    mensaje + " (No mayor a " + lim + "):");
-         }
-         num = Double.parseDouble(aux);
-      } while (num > lim);
-      return (int) num;
+      int aux = capInt(mensaje);
+      while (aux > lim){
+         aux = capInt(mensaje + " (No mayor a " + lim + "):");
+      }
+      return aux;
    }
 
    /**Método para capturar solamente números enteros dentro de un rango determinado*/
    int capInt(String mensaje, int limI, int limS){
-      double num;
-      do {
-         String aux = "";
-         while (!validator.isNum(aux)) {
-            aux = JOptionPane.showInputDialog(null,
-                    mensaje + " ( entre " +  limI + " y " + limS + " ):");
-         }
-         num = Double.parseDouble(aux);
-      } while (num < limI || num > limS);
-      return (int) num;
+      int aux = capInt(mensaje);
+      while (aux < limI || aux > limS){
+         aux = capInt(mensaje + " ( entre " +  limI + " y " + limS + " ):");
+
+      };
+      return aux;
    }
 
    /**Método para capturar solamente números racionales*/
    double capReal(String mensaje){
       String aux = JOptionPane.showInputDialog(null, mensaje);
 
-      while(!validator.isNum(aux)){
+      while(!val.isNum(aux)){
          aux = JOptionPane.showInputDialog(null, mensaje);
       }
       return Double.parseDouble(aux);
@@ -64,49 +56,42 @@ class JavaCap{
 
    /**Método para capturar solamente números racionales con un limite determinado*/
    double capReal(String mensaje, double lim){
-      double num;
-      do {
-         String aux = "";
-         while (!validator.isNum(aux)) {
-            aux = JOptionPane.showInputDialog(null,
-                    mensaje + " (No mayor a " + lim + "):");
-         }
-         num = Double.parseDouble(aux);
-      } while (num > lim);
-      return num;
-   }
-
-   /**Método para capturar solamente números racionales dentro de un rango determinado*/
-   double capInt(String mensaje, double limI, double limS){
-      double num;
-      do {
-         String aux = "";
-         while (!validator.isNum(aux)) {
-            aux = JOptionPane.showInputDialog(null,
-                    mensaje + " ( entre " +  limI + " y " + limS + " ):");
-         }
-         num = Double.parseDouble(aux);
-      } while (num < limI || num > limS);
-      return num;
-   }
-
-   /**Método para capturar solamente una cadena de texto*/
-   String capNom(String mensaje) {
-      String aux = JOptionPane.showInputDialog(null, mensaje);
-
-      while(!validator.isNom(aux)){
-         aux = JOptionPane.showInputDialog(null, mensaje);
+      double aux = capReal(mensaje);
+      while (aux > lim){
+         aux = capReal(mensaje + " (No mayor a " + lim + "):");
       }
       return aux;
    }
 
-   /**Método para capturar una cadena de texto con un límite de caracteres*/
-   String capNom(String mensaje, int LimC) {
-      String aux = JOptionPane.showInputDialog(null, mensaje);
-
-      while(!validator.isNom(aux) || !(aux.length() <= LimC)){
-         aux = JOptionPane.showInputDialog(null, mensaje);
+   /**Método para capturar solamente números racionales dentro de un rango determinado*/
+   double capReal(String mensaje, double limI, double limS){
+      double aux = capReal(mensaje);
+      while (aux < limI || aux > limS){
+         aux = capReal(mensaje + " ( entre " +  limI + " y " + limS + " ):");
       }
+      return aux;
+   }
+
+   /**Método para capturar solamente una cadena de texto*/
+   String capNom(String mensaje) {
+      String aux;
+      do {
+         aux = JOptionPane.showInputDialog(null, mensaje);
+         while(val.isStr(aux)){
+            aux = JOptionPane.showInputDialog(null, mensaje);
+         }
+      }while (!val.isNom(aux));
+      return aux;
+   }
+
+   /**Método para capturar una cadena de texto con un límite de caracteres*/
+   String capNom(String mensaje, int limC) {
+      String aux = capNom(mensaje);
+
+      while(!(aux.length() < limC)) {
+         aux = capNom(mensaje + "(Menor a " + limC + " Caracteres): ");
+      }
+
       return aux;
    }
 
@@ -114,7 +99,7 @@ class JavaCap{
    String capDate(String mensaje){
       String aux = JOptionPane.showInputDialog(null, mensaje);
 
-      while(!validator.isDate(aux)){
+      while(!val.isDate(aux)){
          aux = JOptionPane.showInputDialog(null, mensaje);
       }
       return aux;
@@ -122,11 +107,14 @@ class JavaCap{
 
    /** Método para capturar un directorio*/
    String capDir(String mensaje) {
-      String aux = JOptionPane.showInputDialog(null, mensaje);
-
-      while(!validator.isDir(aux)){
+      String aux;
+      do {
+         aux = JOptionPane.showInputDialog(null, mensaje);
+      while(aux == null){
          aux = JOptionPane.showInputDialog(null, mensaje);
       }
+      } while (!val.isDir(aux));
+
       return aux;
    }
 
@@ -138,14 +126,14 @@ class JavaCap{
       String archivoSeleccionado = null;
       assert files != null;
 
-      if (validator.isDir(directorio)) {
+      if (val.isDir(directorio)) {
          String[] nomFile = new String[files.length];
 
          for (int i = 0; i < files.length; i++) {
             nomFile[i] = files[i].getName();
          }
 
-         while (!validator.isFile(files) && !validator.isStr(archivoSeleccionado)) {
+         while (archivoSeleccionado == null) {
             archivoSeleccionado = (String) JOptionPane.showInputDialog(null,
                     mensaje, "Archivos (" + extension + ")",
                     JOptionPane.PLAIN_MESSAGE, null, nomFile, nomFile[0]);
@@ -161,4 +149,16 @@ class JavaCap{
          return new File("El directorio no es valido");
       }
    }
+   
+   String capList(String mensaje, String[] opciones){
+      String [] Lista = opciones;
+      String aux = null;
+
+      while (aux == null){
+      aux = (String) JOptionPane.showInputDialog(
+                        null, mensaje,
+                        "Elegir",JOptionPane.QUESTION_MESSAGE,null, Lista, Lista[0]);
+      }
+      return aux;
+  }
 }
