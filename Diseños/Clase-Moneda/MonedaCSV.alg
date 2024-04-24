@@ -76,7 +76,7 @@
 	Para i es igual a 0 Donde i es menor que Cuenta E i 1 en 1 Empezar
 		Para j es igual a 0 Donde j es menor que cuentaDivisaFiltrada Y j 1 en 1 Empezar
 			Si listaArticulo[i].ObtenerDivisa()  != DivisasFiltradas[j] Entoces
-				DivisaFiltradas[cuentaDivisaFiltrada] = listaArticulo[i].ObtenerDivisa()
+				DivisaFiltradas[cuentaDivisaFiltrada] = listaMoneda[i].ObtenerDivisa()
 				cuentaDivisaFiltrada++
 			Terminar Si
 		Terminar Para j~~
