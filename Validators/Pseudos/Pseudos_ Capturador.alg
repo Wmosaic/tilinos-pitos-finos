@@ -67,6 +67,14 @@
 	regresar variable
 
 2.1 (Publico-Sobrecargado) (String) capNom(mensaje:String, limC: int)
+	/* 
+	* Esto es una porqueria pero en caso de que un programador chistoso ponga un entero negativo
+    * Abra un ciclo infinito por naturaleza del isNom(), entoces si detecta un negativo lo hace Positivo
+    * Esto se podria lanzar con RisesError quiza para solucionar problemas.
+	* Se proponen una solucion super rapida pero creo que hay una mejor solucion
+    */    
+	Si limChar < 0: limC = limC*-1 
+    Si limChar == 0: limC = limC+1
 	imprimir mensaje
 	leer variable
 
