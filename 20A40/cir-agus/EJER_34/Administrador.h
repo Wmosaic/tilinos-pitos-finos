@@ -8,9 +8,17 @@
 class Administrador : public Empleado
 {
 private:
-    //Sexo
+    std:: string Departamento;
+    double Bono;
 public:
-    Administrador(/* args */);
+    
+    Administrador();
+    Administrador(std::string newDep, double bono);
+    bool setDepartamento(std::string dep);
+    bool setBono(double bono);
+    std::string getDepartamento();
+    double getBono();
+    std::string toStringE();
     ~Administrador();
 };
 

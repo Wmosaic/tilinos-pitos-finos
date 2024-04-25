@@ -42,5 +42,9 @@ std::string Empleado::toString(){
     return cadena;
 }
 
+Empleado::~Empleado(){
+    delete[] this;
+}
+
 
 
