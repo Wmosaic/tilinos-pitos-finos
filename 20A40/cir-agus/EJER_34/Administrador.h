@@ -1,13 +1,14 @@
 # include <string>
+# include "Empleado.h"
 
 # define ADMINISTRADOR_H
 # ifdef ADMINISTRADOR_H
-#include "Empleado.h"
+
 
 class Administrador : public Empleado
 {
 private:
-    /* data */
+    //Sexo
 public:
     Administrador(/* args */);
     ~Administrador();
