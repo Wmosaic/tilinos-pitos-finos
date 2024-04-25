@@ -2,8 +2,9 @@
 
 # define ADMINISTRADOR_H
 # ifdef ADMINISTRADOR_H
+#include "Empleado.h"
 
-class Administrador
+class Administrador : public Empleado
 {
 private:
     /* data */
