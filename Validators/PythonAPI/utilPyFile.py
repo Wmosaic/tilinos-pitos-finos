@@ -27,8 +27,15 @@ class utilPyFile:
        except: return False
     
     def areFiles(self, direccion, ext) -> list:
-        myFiles = [file for file in listdir(direccion) if file.lower().endswith(ext) and Path(file).is_file()]
+        myFiles = []
+        myRutaPath = Path(direccion)
+    
+        for files in myRutaPath.iterdir():
+            if str(files).lower().endswith(ext) and files.is_file():
+                myFiles.append(str(files.name))
+                
         if len(myFiles) == 0: abort()
+        
         return myFiles
             
     def capDir(self) -> str:
@@ -43,24 +50,50 @@ class utilPyFile:
     
     @dispatch(str)
     def capFile(self,ext) -> Path:
-        rutaDeAcceso = self.capDire()
-         
-        myFiles = self.areFiles(rutaDeAcceso,ext)
+        misArchivos = []
+        rutaDeAcceso = self.capDir()
+        myRuta = Path(rutaDeAcceso)
         
-        for i in range(0,len(myFiles),1):
-            print("{:d}.{}".format(i+1,myFiles[i]))
+        for files in myRuta.iterdir():
+            if str(files).lower().endswith(ext) and files.is_file():
+                misArchivos.append(str(files.name))
         
-        index = self.__objC.capInte("Seleccione su archivo por numero: ",1,len(myFiles))
+        if len(misArchivos) == 0: abort()
         
-        return Path(rutaDeAcceso+"/"+myFiles[index-1])
+        for i in range(0,len(misArchivos),1): 
+            print("{:d}.{}".format(i+1,misArchivos[i]))
+        
+        index = self.__objC.capInte("Seleccione su archivo por numero: ",1,len(misArchivos))
+        
+        return Path(rutaDeAcceso+"/"+misArchivos[index-1])
     
     @dispatch(str,str)
     def capFile(self,direccion,ext) -> Path:
-        myFiles = self.areFiles(direccion,ext)
+       misArchivos = []
+       myRuta = Path(direccion)
         
-        for i in range(0,len(myFiles),1):
-            print("{:d}.{}".format(i+1,myFiles[i]))
+       for files in myRuta.iterdir():
+            if str(files).lower().endswith(ext) and files.is_file():
+                misArchivos.append(str(files.name))
         
-        index = self.__objC.capInte("Seleccione su archivo por numero: ",1,len(myFiles))
+       if len(misArchivos) == 0: abort()
+       
+       for i in range(0,len(misArchivos),1): print("{:d}.{}".format(i+1,misArchivos[i]))
         
-        return Path(direccion+"/"+myFiles[index-1])
+       index = self.__objC.capInte("Seleccione su archivo por numero: ",1,len(misArchivos))
+        
+       return Path(direccion+"/"+misArchivos[index-1])
+
+"""
+    def areFiles(self, direccion, ext) -> list:
+        myFiles = []
+        myRutaPath = Path(direccion)
+    
+        for files in myRutaPath.iterdir():
+            if str(files).lower().endswith(ext) and files.is_file():
+                myFiles.append(str(files.name))
+                
+        if len(myFiles) == 0: abort()
+        
+        return myFiles
+        """
