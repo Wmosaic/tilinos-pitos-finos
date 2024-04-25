@@ -47,5 +47,5 @@ class Moneda:
         cadena += f"Valor: {self.__valor}\n"
         cadena += f"Pais: {self.__pais}\n"
         cadena += f"Año: {self.__año}\n"
-        cadena += f"Escudo: {self.__escudo}\n"
+        cadena += f"Escudo: {self.__escudo}"
         return cadena

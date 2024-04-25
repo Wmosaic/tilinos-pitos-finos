@@ -58,7 +58,9 @@ class utilPyFile:
             if str(files).lower().endswith(ext) and files.is_file():
                 misArchivos.append(str(files.name))
         
-        if len(misArchivos) == 0: abort()
+        if len(misArchivos) == 0:
+            print("No se encontro un archivo con la extension o estan dañados")
+            abort()
         
         for i in range(0,len(misArchivos),1): 
             print("{:d}.{}".format(i+1,misArchivos[i]))
