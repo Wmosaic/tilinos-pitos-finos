@@ -27,7 +27,7 @@ class Capturas:
             print("Solo permiten letras")
             cade = input(mensaje)
         
-        return cade
+        return str(cade)
     
     @dispatch(str,int)
     def capCade(self,mensaje,limChar) -> str:
