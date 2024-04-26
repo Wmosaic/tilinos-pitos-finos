@@ -1,0 +1,75 @@
+Funcion Meta: 
+     Favor de modelar un algoritmo con enfoque de sistemas que le 
+     permita capturar y desplegar en su pantalla la lista del mandado 
+     con n articulos (use dato centinela para terminar la captura)
+Fin Funcion
+
+Funcion LeerArchivoCSV:
+     Leer archivo CSV
+     Para cada linea en el archivo CSV:
+          Dividir la linea en campos
+          Si hay espacio en la lista de articulos y la cantidad de campos es 4:
+               Crear un nuevo objeto Articulo
+               Establecer la descripción, unidad, cantidad y precio del artículo utilizando los campos obtenidos
+               Agregar el artículo a la lista de artículos
+Fin Funcion
+
+Funcion Datos: 
+     Usando un arreglo de 50 apuntadores a Articulos. Llamado a [50];
+     Terminar la captura usando un dato centinela = "Fin".
+     cuenta = 0 //Para subindice del arreglo
+
+     Escribir ("Lista del mandado: ")
+     Escribir ("Descripcion del articulo o \"fin\:"); desc=?
+     mientras (desc ! = "Fin" y cuenta <50) empezar
+     Escribir ("Deme el precio unitario:"); precio = ?
+     Escribir ("Cuantos de estos desea?: "); cantidad = ?
+     Escribir (son kg, mts, litro? unidad: "); unidad = ?
+     A [cuenta] = nuevo Articulo()
+     A [cuenta] .setDescripcion (dec),
+     A [cuenta] .setPrecio (precio),
+     A [cuenta] .setCantidad (cantidad),
+     A [cuenta] .setUnidad (unidad),
+     cuenta = cuenta+1;
+     Escribir ("Descripcion del articulo o  \"fin\":"); desc = ?
+     terminar
+Fin Funcion
+
+Funcion Calculos: 
+     usar un arreglo de monto [50] para empezar a almacenar costos
+     subtotal = 0
+     Establecer un lazo contado:
+     desde i = 0 hasta i = cuenta para empezar
+          monto [i] = A [i].getCantidad()*A[i].getPrecio();
+          subtotal = subtotal+monto[i];
+     terminar
+     iva = subtotal*.16;
+     total = subtotal+iva;
+Fin Funcion
+
+Funcion Resultados: 
+     Escribir ("Lista del mandado: ")
+     Escribir ("cantidad, unidad, descripcion, precio unitario, monto")
+     Escribir ("-----------------------------------------------------")
+     Establecer un lazo contado:
+     desde i = 0 hasta i = cuenta para empezar
+     Escribir (A[i].getCantidad()+" ");
+     Escribir (A[i].getUnidad()+" ");
+     Escribir (A[i].getDescripcion()+" ");
+     Escribir (A[i].getPrecio()+" ");
+     Escribir (monto[i]+"\n");
+     terminar
+     Escribir ("Subtotal: "+subtotal);
+     Escribir ("iva: "+iva)
+     Escribir ("-----------------------------------------------------")
+     Escribir ("Total"+total);
+Fin Funcion
+
+Funcion Main:
+     Escribir ("Desea capturar y desplegar una nueva lista del mandado? s/n:")
+     Respuesta = ?
+     Mientras (respuesta =="s")
+          regresar a la funcion datos
+     de otro modo terminar
+     Aqui se encuentran el llamado de las funciones para correr y la limpieza de pantalla
+Fin funcion
