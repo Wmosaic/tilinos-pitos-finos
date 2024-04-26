@@ -43,8 +43,9 @@ int leerCSV()
 {
     string nomArchivo;
     int cuenta = 0;
-
-    ifstream archivo("Lista.txt",ios::in);
+    cout << "Capture el nombre del archivo: ";
+    cin >> nomArchivo;
+    ifstream archivo(nomArchivo,ios::in);
     string linea;
 
     if(!archivo.is_open()){ cout <<"Salio"; exit(0); }
