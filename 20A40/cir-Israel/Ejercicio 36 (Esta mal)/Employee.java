@@ -43,4 +43,12 @@ public class Employee {              // mutable
     }
     return false;
   }
+
+  public String toString(){
+    String cadString = "Nombre: "+name+"\n";
+    cadString += "Salario: "+salary+"\n";
+    cadString += "Fecha: "+birthDate+"\n";
+    return cadString;
+
+  } 
 }

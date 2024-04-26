@@ -39,8 +39,8 @@ public class Manager extends Employee{
   public String toString(){
     String toM = super.toString();
 
-    String cadString = toM+"Departamento: "+department;
-    cadString += "Bono "+bono;
+    String cadString = toM +"Departamento: "+department+"\n";
+    cadString += "Bono "+bono+"\n";
     return cadString;
   }
 }

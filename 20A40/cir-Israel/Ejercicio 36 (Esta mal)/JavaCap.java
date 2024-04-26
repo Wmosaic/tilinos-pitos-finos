@@ -57,7 +57,7 @@ public class JavaCap {
    /**Método para capturar solamente números racionales con un limite determinado*/
    double capReal(String mensaje, double lim){
       double aux = capReal(mensaje);
-      while (aux > lim){
+      while (aux < lim){
          aux = capReal(mensaje + " (No mayor a " + lim + "):");
       }
       return aux;
@@ -88,7 +88,7 @@ public class JavaCap {
    String capNom(String mensaje, int limC) {
       String aux = capNom(mensaje);
 
-      while(!(aux.length() < limC)) {
+      while(!(aux.length() <= limC)) {
          aux = capNom(mensaje + "(Menor a " + limC + " Caracteres): ");
       }
 
