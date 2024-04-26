@@ -31,7 +31,8 @@ class Employee:
         cadena += f"Direccion: {self.__adrs}\n"
         cadena += f"Salario: {self.__sala}"
         return cadena
-
+    def recivePay(self, pago) -> bool:pass
+    
 """Falta estudio
     def __init_subclass__(cls,name, adress, salary) -> None:
         cls.__name = name

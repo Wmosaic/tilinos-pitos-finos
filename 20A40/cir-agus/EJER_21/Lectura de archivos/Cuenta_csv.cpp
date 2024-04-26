@@ -41,7 +41,9 @@ int data_Tradicional()
 
 int leerCSV()
 {
+    string nomArchivo;
     int cuenta = 0;
+
     ifstream archivo("Lista.txt",ios::in);
     string linea;
 
