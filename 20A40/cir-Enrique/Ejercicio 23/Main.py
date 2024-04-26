@@ -1,120 +1,126 @@
-from typing import Self
-from Moneda import *
 from PythonCap import *
 from PythonVal import *
-
+from os import system
 Val = PythonVal()
 Cap = PythonCap()
 
-cuenta = 0
-moneda = []
-monedas = []
-repeticionMoneda = []
 
-def Navegabilidad():
-        AFF = 'SI'
-        while AFF == 'SI':
-            meta()
-            print("Seleccione una opción (Tradicional/Fichero): ")
-            opcion = input().lower()
-            if opcion == 'tradicional':
-                CapturaManual()
-            elif opcion == 'fichero':
-                CapturaCSV()
-            else:
-                print('Seleccione una opción válida')
-                continue
+from Moneda import Moneda
+guion = "-"*50
+
+def meta() -> None:
+    print("Capturar y desplegar una lista de monedas")
+    print("Presentes dentro de un monedero totalizando")
+    print("las monedas presentes dentro de cada divisa")
+    print("Por captura de datos Centinelas o CSV")
+    print(guion)
+
+
+def capturaManual() -> list:
+    Monedero = []
+    repeticionMoneda = []
+    print("\nCapture las Caracteristicas de sus Monedas")
+    print(guion)
+    
+    for _ in range(0,50,1):
+        divisa = Cap.capCade("Deme el nombre de la divisa o fin: ",40)
+        if divisa.lower() == "fin": break
+        valor  = Cap.capReal("Capture el valor: ",1.0)
+        pais   = Cap.capNom("Capture el pais de procedencia: ",40)
+        año    = Cap.capInte("Capture el año: ",1000)
+        Escudo = Cap.capNom("Capture como se llama el Escudo: ",40)
+        mones  = Cap.capInte("¿Cuantas veces se repite la moneda?: ",1)
+        repeticionMoneda.append(mones)
+        Monedero.append(Moneda(divisa,valor,pais,año,Escudo))
+    
+    print(guion)
+    print("Yeah")
+    return Monedero,repeticionMoneda
+
+
+def capturaFichero() -> list:
+    Monedero = []
+    repeticionMoneda = []
+    miArchivo = Cap.capFile("Seleccione un archivo:", 
+                            r'C:\Users\EnrickMC\Desktop\Ejercicios 21-40\Ejercicio 23'
+                            , ".csv")
+    
+    with open(miArchivo,"r",encoding='UTF-8') as fileCSV:
+        fileCSV.readline()
+        for linea in fileCSV:
+            listaStringTemp = linea.rsplit(',')
+            divisa = str(listaStringTemp[0])
+            valor  = float(listaStringTemp[1])
+            pais   = str(listaStringTemp[2])
+            año    = int(listaStringTemp[3])
+            escudo = str(listaStringTemp[4])
+            repeticionMoneda.append(int(listaStringTemp[5]))
+            Monedero.append(Moneda(divisa,valor,pais,año,escudo))	
+    print(guion)
+    print("Leyendos archivos")
+    return Monedero,repeticionMoneda
+    
+
+def setMonedas(Monedero) -> list:
+    newMonedas = []
+    
+    for i in range(0,len(Monedero),1):
+        if Monedero[i].getDivisa() not in newMonedas: 
+            newMonedas.append(Monedero[i].getDivisa())
             
-            Calculos()
-            Salida()
-            print("Capturar otros datos AFF: ")
-            AFF = input().upper()
-
-def meta():
-        print("Capturar y desplegar una lista de monedas")
-        print("Presentes dentro de un monedero totalizando")
-        print("las monedas presentes dentro de cada divisa")
-        print("Por captura de datos Centinelas o CSV")
+    return newMonedas
 
 
-def CapturaManual():
-        global cuenta
-        while cuenta < 100:
-            nomDivisa = Cap.capNom("Captura el nombre de la divisa / fin: ")
-            if nomDivisa.lower() == "fin":
-                break
-
-            valMoneda = Cap.capReal("Capture el valor de la moneda: ",0)
-
-            nomPais = Cap.capNom("Capture el país de la moneda: ")
-
-            añoMoneda = Cap.capInt("Capture el año de la Moneda: ",1900)
-
-            nomEscudo = Cap.capNom("Capture el nombre del escudo: ")
-
-            repeticionMoneda = Cap.capInt("¿Cuántas veces se repiten las características de esta Moneda? ",0)
-
-            monedas.append(Moneda(nomDivisa, valMoneda, nomPais, añoMoneda, nomEscudo))
-            repeticionMoneda.append(repeticionMoneda)
-            cuenta += 1
-        return cuenta
-            
-
-def CapturaCSV(): 
-        global cuenta
-        dir = Cap.capFile("Seleccione su archivo usando su número: ",
-                            r'C:\Users\aguir\Desktop\Ejercicios 21-40\Ejercicio 23',
-                            '.csv')
-                
-        
-        archivo = open(dir)
-        archivo.readline() 
-
-        lineaCSV = archivo.readline().strip().split(",") 
-        for fila in lineaCSV:
-            nomDivisa, valMoneda, nomPais, añoMoneda, nomEscudo, repeticion = lineaCSV 
-        
-            moneda.append(Moneda(nomDivisa,valMoneda, nomPais, añoMoneda, nomEscudo))
-            repeticionMoneda.append(repeticion)
-            cuenta += 1
-            lineaCSV = archivo.readline().strip().split(",")
-        
-        archivo.close()
-        return moneda, cuenta, repeticionMoneda
+def calculos(Monedero,repeticionMoneda) -> list:
+    newMonedas = setMonedas(Monedero)
+    subTotal = []
+    totalPorDivisa = []
     
+    for i in range(0,len(newMonedas),1):
+        dineros = 0
+        for j in range(0,len(Monedero),1):
+            if newMonedas[i] == Monedero[j].getDivisa():
+                dineros += repeticionMoneda[j] * Monedero[j].getValor()
+        totalPorDivisa.append(dineros)
+    
+    for k in range(0,len(Monedero),1): 
+        subTotal.append(repeticionMoneda[k]*Monedero[k].getValor())
+    
+    return subTotal,totalPorDivisa,newMonedas
 
-def setDivisas():
-        divisas_filtradas = set() 
+
+def salida(Monedero,repeticionMoneda,subtotalDivisa,totalDivisa,newMonedas) -> None:
+    print(guion)
+    for i in range(0,len(Monedero),1):
+        print(Monedero[i].toString())
+        print("Hubo un total de: ",repeticionMoneda[i]," Elementos repetidos")
+        print("En subtotal hay: ",subtotalDivisa[i])
+        print(guion)
+    
+    for r in range(0,len(totalDivisa),1):
+        print("De la divisa: "+str(newMonedas[r]),end=" ")
+        print("Hubo un total de: "+str(totalDivisa[r]))
+    print(guion)
         
-        for moneda in monedas:
-            divisas_filtradas.add(moneda.getDivisa())
-        
-        return list(divisas_filtradas)
-    
-def Calculos():
-        nuevas_divisas = setDivisas() 
-        cuenta_val = []
 
-        for divisa in nuevas_divisas:
-            dinero = 0
-            for i in range(len(monedas)):
-                if divisa == monedas[i].getDivisa():
-                    dinero += repeticionMoneda[i] * monedas[i].getValor()
-            cuenta_val.append(dinero)
-
-        return cuenta_val
-    
-    
-def Salida():
-        new_divisas = setDivisas() 
-        print("Su monedero: ")
-        for i in range(len(monedas)):
-            print(moneda[i].toString())
-            print("-------------------")
-
-        for j in range(len(new_divisas)):
-            print(f"La divisa: {new_divisas[j]} tiene: {Calculos()[j]}")
+def main() -> None:
+    AFF = "S"
+    while AFF == "S" or AFF == "s":
+        system("cls")
+        meta()
+        opc = Cap.capNom("Seleccione una opcion Manual/Fichero: ")
+        match opc.lower():
+            case "manual": 
+                mone,rept = capturaManual()
+            case "fichero":
+                mone,rept = capturaFichero()
+            case _: continue
+        sub,tota,newDivi = calculos(mone,rept)
+        salida(mone,rept,sub,tota,newDivi)
+        AFF = input("Desea repetir el proceso[S/N]: ")
 
 
-class Main:
-    Navegabilidad()
+main()
+
+if __name__ == "main":
+    main()

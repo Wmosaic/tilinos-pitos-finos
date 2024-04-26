@@ -58,7 +58,6 @@ public class Articulo {
       }
    }
 
-
    public String getDescription()
    {
       return description;
@@ -76,13 +75,13 @@ public class Articulo {
       return cantidad;
    }
 
-   public boolean mostrarInfo()
+   public String toString()
    {
-      System.out.println(getCantidad() 
+      String concat = (getCantidad() 
       + " " + getUnidad() 
       + " de " + getDescription() 
       + " a $" + getPrecio());
-      return false;
+      return concat;
    }
 
 }
