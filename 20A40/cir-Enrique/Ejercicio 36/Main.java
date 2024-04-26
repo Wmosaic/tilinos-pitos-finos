@@ -10,6 +10,7 @@ public class Main {
     {
        Main main = new Main();
        main.meta();
+       main.Datos();
        main.Calculos();
        main.Reportar();
     }
@@ -30,17 +31,19 @@ public class Main {
             double salario = Cap.capReal("Ingrese el salario:",0);
             String nacimiento = Cap.capDate("Ingrese la fecha de nacimiento con formato (dd/mm/aaaa):");
 
-            if (AFF.equals("A")) {
+            if (AFF.toUpperCase().equals("A")) {
                 String depto = Cap.capNom("Ingrese el departamento:",40);
                 double bono = Cap.capReal("Ingrese el bono:", 0);
                 nomina[indice] = new Administrador(nombre, salario, nacimiento, depto, bono);
             } 
-            else if (AFF.equals("N")) {
+            else if (AFF.toUpperCase().equals("N")) {
                 nomina[indice] = new Empleado(nombre, salario, nacimiento);
             } else {
                 System.out.println("Tipo de empleado no válido.");
                 continue;
             }
+            indice ++;
+            AFF = Cap.capNom("¿Qué tipo de Empleado es? ([N] para Normal, [A] para Administrador o [fin] para salir)");
         }
 
     }
