@@ -1,10 +1,8 @@
 import sys
 from os import system
-sys.path.append("C:\\Users\\Luis.Luisss\\Documentos\\Programacion\\Tilinos\\tilinos-pitos-finos\\")
-sys.path.append("C:\\Users\\Luis.Luisss\\Documentos\\Programacion\\Tilinos\\tilinos-pitos-finos\\Validators\\PythonAPI")
-
-from Validators.PythonAPI.Capturas import Capturas
-from Validators.PythonAPI.utilPyFile import utilPyFile
+sys.path.append("PythonAPI")
+from PythonAPI.Capturas import Capturas
+from PythonAPI.utilPyFile import utilPyFile
 from Moneda import Moneda
 
 Cap = Capturas()

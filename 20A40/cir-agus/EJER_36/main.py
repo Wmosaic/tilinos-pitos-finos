@@ -1,3 +1,5 @@
+import sys
+sys.path.append("PythonAPI")
 from Administrador import Administrador,Empleado
 from PythonAPI.Capturas import Capturas
 from os import system
@@ -41,15 +43,15 @@ def calculos(nominas) -> list:
 
 def salida(nominas,total,sumaNominas,sumaBonos) -> None:
     print("-"*50)
-    print("Para los empleados de la empresa.",end="\n")
+    print("Para los empleados de la empresa.")
     
     for i in range(0,len(nominas),1):
         if isinstance(nominas[i], Administrador):
-            print("Datos de los adminstradores: ")
+            print("Datos del admistrador: ")
             print(nominas[i].toString())
             print("-"*50)
         else:
-            print("Datos de los empleados: ")
+            print("Datos del empleado: ")
             print(nominas[i].toString())
             print("-"*50)
             
