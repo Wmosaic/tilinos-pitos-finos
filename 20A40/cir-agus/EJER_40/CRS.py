@@ -1,4 +1,5 @@
 from Manager import Employee,Manager
+from datetime import datetime
 
 class CRS(Employee):
     def __init__(self, headType, myManager, loginID) -> None:
@@ -36,3 +37,6 @@ class CRS(Employee):
         cadena += f"My Manager: {self.__myManager.getName()}\n"
         cadena += f"Login ID: {self.__loginID}"
         return cadena
+    
+    def clockIN(self)->datetime:pass
+    def ClocksOut(self)->datetime:pass

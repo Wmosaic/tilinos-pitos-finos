@@ -36,3 +36,6 @@ class Manager(Employee):
         cadena += f"ID Official: {self.__officeID}\n"
         cadena += f"Bono: {self.__bonus}\n"
         return cadena
+    
+    def hires(self) -> Employee: pass
+    def plans(self) -> None: pass 
