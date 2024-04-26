@@ -1,4 +1,6 @@
 #include "Point.h"
+#include "Splitter.h"
+#include <regex>
 
 using namespace std::string_literals; 
 
@@ -13,6 +15,19 @@ void Point::setY(double y_param){    this->y = y_param;    }
 
 double Point::getX(){    return this->x;    };
 double Point::getY(){    return this->y;    };
+
+bool Point::setPoint(std::string point){
+    std::basic_regex<char> patronRegex{
+        "^(-?\\d+(\\.\\d+)?), (-?\\d+(\\.\\d+)?)$"};
+
+    if(!std::regex_match(point, patronRegex))
+        return false;
+    
+    auto nums = Splitter::Split(point, ',');
+    this->x = stof(nums[0]);
+    this->y = stof(nums[1]);
+    return true;
+}
 
 std::string Point::toString(){
     std::string coordX {std::to_string(x)};

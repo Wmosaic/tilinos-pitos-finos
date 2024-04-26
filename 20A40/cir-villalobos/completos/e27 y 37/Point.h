@@ -15,6 +15,8 @@ public:
     void setX(double x_param);
     void setY(double y_param);
 
+    bool setPoint(std::string point);
+
     double getX();
     double getY();
 
