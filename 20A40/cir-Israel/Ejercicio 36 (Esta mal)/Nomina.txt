@@ -1,0 +1,178 @@
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+import java.io.IOException;
+import java.text.DateFormat;
+
+class Nomina {
+    Locale currentLocale = Locale.FRANCE;
+    Scanner t = new Scanner(System.in);
+    Employee E[] = new Employee[100];
+    double suma, tNom, bono;
+    int index, tipo;
+    String nombre;
+
+    void inicio() {
+        System.out.println("Para lista empleados");
+    }
+    boolean isDate(String s) {
+        for (int i = 0; i < s.length() - 1; i++)
+            if (s.charAt(i) == '/' || s.charAt(i) == '-' || s.charAt(i) == '.')
+                continue;
+            else if (s.charAt(i) < '0' || s.charAt(i) > '9')
+                return false;
+        return true;
+    }
+
+    static public Date displayDate(Locale currentLocale, Date f) {
+        Date today;
+        String dateOut;
+        DateFormat dateFormatter;
+
+        dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT, currentLocale);
+        today = new Date();
+        if (f != null) dateOut = dateFormatter.format(f);
+        else dateOut = dateFormatter.format(today);
+        System.out.print(dateOut);
+        return today;
+    }
+
+    Date capDate(String prompt) {
+        // Permitir al usuario elegir la fecha sugerida por el sistema
+        // o cambiarla a su voluntad
+        Date today = null;
+        int dd, mm, yy = 0;
+        String dateIn;
+
+        System.out.print(prompt + "o <enter> para aceptar:");
+        // today = displayDate (currentLocale, null);
+        // System.out.println ("\b\b\b\b\b\b\b\b");
+        dateIn = t.nextLine();
+        if ((!dateIn.equals("")) && isDate(dateIn)) {
+            dd = Integer.parseInt(dateIn.substring(0, 2));
+            mm = Integer.parseInt(dateIn.substring(3, 5));
+            if (dateIn.length() == 8)
+                yy = Integer.parseInt(dateIn.substring(6, 8));
+            if (dateIn.length() == 10)
+                yy = Integer.parseInt(dateIn.substring(6, 10)) - 1900;
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, yy);
+            calendar.set(Calendar.MONTH, mm - 1);
+            calendar.set(Calendar.DAY_OF_MONTH, dd);
+            return calendar.getTime();
+
+        }
+        return today;
+    }
+
+    int capInteger(String s) {
+        String tmp;
+        do {
+            System.out.print(s);
+            tmp = t.nextLine();
+        } while (!isNum(tmp));
+        return Integer.parseInt(tmp);
+    }
+
+    double capDouble(String s) {
+        String tmp;
+        do {
+            System.out.print(s);
+            tmp = t.nextLine();
+        } while (!isNum(tmp));
+        return Double.parseDouble(tmp);
+    }
+
+    public boolean isNum(String cad) {
+        try {
+            Double.parseDouble(cad);
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("No sea chistoso y tecle correctamente");
+            return false;
+        }
+    }
+
+    int menute(String options) {
+        int tipo;
+        do
+            tipo = capInteger(options);
+        while (tipo != 1 && tipo != 2);
+        return tipo;
+    }
+
+    void datos() {
+        double salario, bono;
+        String nombre, depto;
+        Date fecha;
+
+        System.out.println("Ingrese el nombre, (fin) para terminar):");
+        nombre = t.nextLine();
+        while (!nombre.toUpperCase().equals("FIN") && index < E.length) {
+            salario = capDouble("salario: ");
+            fecha = capDate("Fecha de nacimiento: ");
+            tipo = menute("1. Empleado     2. Administrador: ");
+            if (tipo == 1)
+                E[index] = new Employee(nombre, salario, fecha);
+            else {
+                System.out.print("Ingrese el departamento: ");
+                depto = t.nextLine();
+                bono = capDouble("Ingrese el bono");
+                E[index] = new Manager(nombre, salario, fecha, depto, bono);
+            }
+            if (index < E.length) {
+                index++;
+                System.out.print("Ingrese el nombre, (fin) para terminar):");
+                nombre = t.nextLine();
+            } else
+                System.out.println("Se ha llenado el arreglo");
+        }
+    }
+
+    public void calculos() {
+        for (int i = 0; i < index; i++) {
+            suma = suma + E[i].getSalary();
+            if (E[i] instanceof Manager) {
+                Manager c = (Manager) E[i];
+                bono = bono + c.getBono();
+            }
+            tNom = suma + bono;
+        }
+    }
+
+void resultado() {
+    System.out.println("-----------------------------------------------");
+    System.out.println("Lista de empleados:");
+    System.out.println("#   Nombre      Salario     Depto       Bono");
+    System.out.println("-----------------------------------------------");
+    for (int i = 0; i < index; i++) {
+        System.out.print((i + 1) + "   " + E[i].getName());
+        if (E[i] instanceof Manager) {
+            Manager c = (Manager) E[i];
+            System.out.println("    " + E[i].getSalary() + "    " + c.getDepartment() + "    " + c.getBono());
+        } else {
+            System.out.println("    " + E[i].getSalary());
+        }
+    }
+    System.out.println("-----------------------------------------------");
+    System.out.println("Total Salarios: " + suma);
+    System.out.println("Total Bonos: " + bono);
+    System.out.println("Total Nomina: " + tNom);
+}
+
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        String respuesta;
+        do {
+            Nomina nomina = new Nomina();
+            nomina.inicio();
+            nomina.datos();
+            nomina.calculos();
+            nomina.resultado();
+            System.out.println("¿Desea repetir el programa? (s/n): ");
+            respuesta = scanner.nextLine();
+        } while (respuesta.equalsIgnoreCase("s"));
+        scanner.close();
+    }
+}
