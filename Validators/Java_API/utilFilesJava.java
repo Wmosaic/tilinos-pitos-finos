@@ -6,19 +6,7 @@ import java.util.Scanner;
 import java.util.regex.*;
 
 class utilFilesJava {
-
-   public class JavaCap {
-   private JavaVal val;
    Scanner scanner = new Scanner(System.in);
-
-   /**Constructores para inicializar los validadores dependiendo el contexto*/
-   JavaCap(){
-      this.val = new JavaVal();
-   }
-   JavaCap(JavaVal val){
-      this.val = val;
-   }
-
 
    /**Método para capturar solamente números enteros*/
    int capInt(String mensaje){
@@ -93,7 +81,7 @@ class utilFilesJava {
             aux = scanner.nextLine();
 
          }
-      }while (!val.isNom(aux));
+      }while (!isNom(aux));
       return aux.trim();
    }
 
@@ -197,6 +185,11 @@ class utilFilesJava {
       System.out.println("No hay opciones disponibles");
       return null;
    }
+
+   public void clear() {
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
+   }
  
    /**Método para validar números naturales enteros*/
    public boolean isNum(String cadena) {
@@ -254,6 +247,5 @@ class utilFilesJava {
          return false;
       }
       return true;
-   }
    }
 }
