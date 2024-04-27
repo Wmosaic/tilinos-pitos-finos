@@ -1,29 +1,27 @@
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
-import java.util.Scanner;
 
-//Todos los capturadores de esta clase hacen uso del Scanner
+//Todos los capturadores de esta clase hacen uso del JOptionPane
 
-public class JavaCap {
+public class JavaCapJOptionpane {
    private JavaVal val;
-   Scanner scanner = new Scanner(System.in);
 
    /**Constructores para inicializar los validadores dependiendo el contexto*/
-   JavaCap(){
+   JavaCapJOptionpane(){
       this.val = new JavaVal();
    }
-   JavaCap(JavaVal val){
+   JavaCapJOptionpane(JavaVal val){
       this.val = val;
    }
 
 
    /**Método para capturar solamente números enteros*/
    int capInt(String mensaje){
-      System.out.println(mensaje);
-      String aux = scanner.nextLine();
+      String aux = JOptionPane.showInputDialog(null, mensaje);
 
       while(!val.isNum(aux)){
-         System.out.println(mensaje);
-         aux = scanner.nextLine();
+         aux = JOptionPane.showInputDialog(null, mensaje);
       }
       return (int) Float.parseFloat(aux);
    }
@@ -40,20 +38,19 @@ public class JavaCap {
    /**Método para capturar solamente números enteros dentro de un rango determinado*/
    int capInt(String mensaje, int limI, int limS){
       int aux = capInt(mensaje);
-      while (aux < limI || aux > limS){
+      while (aux <= limI || aux >= limS){
          aux = capInt(mensaje + "(Entre " + limI + " y " + limS + ") ");
+
       };
       return aux;
    }
 
    /**Método para capturar solamente números racionales*/
    double capReal(String mensaje){
-      System.out.println(mensaje);
-      String aux = scanner.nextLine();
+      String aux = JOptionPane.showInputDialog(null, mensaje);
 
       while(!val.isNum(aux)){
-         System.out.println(mensaje);
-         aux = scanner.nextLine();
+         aux = JOptionPane.showInputDialog(null, mensaje);
       }
       return Double.parseDouble(aux);
    }
@@ -63,7 +60,6 @@ public class JavaCap {
       double aux = capReal(mensaje);
       while (aux < lim){
          aux = capReal(mensaje + "(No menor a " + lim + ") ");
-
       }
       return aux;
    }
@@ -71,7 +67,7 @@ public class JavaCap {
    /**Método para capturar solamente números racionales dentro de un rango determinado*/
    double capReal(String mensaje, double limI, double limS){
       double aux = capReal(mensaje);
-      while (aux < limI || aux > limS){
+      while (aux <= limI || aux >= limS){
          aux = capReal(mensaje + "(Entre " + limI + " y " + limS + ") ");
       }
       return aux;
@@ -81,13 +77,9 @@ public class JavaCap {
    String capNom(String mensaje) {
       String aux;
       do {
-         System.out.println(mensaje);
-         aux = scanner.nextLine();
-
+         aux = JOptionPane.showInputDialog(null, mensaje);
          while(val.isStr(aux)){
-            System.out.println(mensaje);
-            aux = scanner.nextLine();
-
+            aux = JOptionPane.showInputDialog(null, mensaje);
          }
       }while (!val.isNom(aux));
       return aux.trim();
@@ -105,12 +97,10 @@ public class JavaCap {
 
    /** Método para capturar una fecha*/
    String capDate(String mensaje){
-      System.out.println(mensaje);
-      String aux = scanner.nextLine();
+      String aux = JOptionPane.showInputDialog(null, mensaje);
 
       while(!val.isDate(aux)){
-         System.out.println("(Fecha Invalida) " + mensaje);
-         aux = scanner.nextLine();
+         aux = JOptionPane.showInputDialog(null, mensaje);
       }
       return aux;
    }
@@ -119,24 +109,20 @@ public class JavaCap {
    String capDir(String mensaje) {
       String aux;
       do {
-         System.out.println(mensaje);
-         aux = scanner.nextLine();
-
+         aux = JOptionPane.showInputDialog(null, mensaje);
          while(aux == null){
-            System.out.println(mensaje);
-            aux = scanner.nextLine();
-
+            aux = JOptionPane.showInputDialog(null, mensaje);
          }
       } while (!val.isDir(aux));
       return aux.trim();
    }
 
    /**-Método para capturar un archivo de un tipo de extension (Desplegable en una lista).
-    *Extension validada, responsabilidad del programador*/
+    *Extension validados, responsabilidad del programador*/
    File capFile(String mensaje, String extension) {
       String directorio = capDir("Ingresa un Directorio:");
-
       File dir = new File(directorio);
+      String archivoSeleccionado = null;
       File[] files = dir.listFiles((directory, file) -> file.toLowerCase().endsWith(extension));
       assert files != null;
 
@@ -146,14 +132,18 @@ public class JavaCap {
          nomFile[i] = files[i].getName();
       }
 
-      String archivoSeleccionado = capList(mensaje, nomFile);
+      while (archivoSeleccionado == null) {
+         archivoSeleccionado = (String) JOptionPane.showInputDialog(null,
+                 mensaje, "Archivos (" + extension + ")",
+                 JOptionPane.PLAIN_MESSAGE, null, nomFile, nomFile[0]);
+      }
 
       for (File file : files) {
          if (file.getName().equals(archivoSeleccionado)) {
             return file;
          }
       }
-      System.out.println("No se encontró el archivo seleccionado.");
+      JOptionPane.showMessageDialog(null, "No se encontró el archivo seleccionado.");
       return null;
    }
 
@@ -162,6 +152,7 @@ public class JavaCap {
    File capFile(String mensaje, String directorio, String extension) {
       File dir = new File(directorio);
       File[] files = dir.listFiles((directory, file) -> file.toLowerCase().endsWith(extension));
+      String archivoSeleccionado = null;
       assert files != null;
 
       String[] nomFile = new String[files.length];
@@ -170,27 +161,60 @@ public class JavaCap {
          nomFile[i] = files[i].getName();
       }
 
-      String archivoSeleccionado = capList(mensaje, nomFile);
+      while (archivoSeleccionado == null) {
+         archivoSeleccionado = (String) JOptionPane.showInputDialog(null,
+                 mensaje, "Archivos (" + extension + ")",
+                 JOptionPane.PLAIN_MESSAGE, null, nomFile, nomFile[0]);
+      }
 
       for (File file : files) {
          if (file.getName().equals(archivoSeleccionado)) {
             return file;
          }
       }
-      System.out.println("No se encontró el archivo seleccionado.");
+      JOptionPane.showMessageDialog(null, "No se encontró el archivo seleccionado.");
       return null;
    }
 
-   /** Método para desplegar una lista*/
-   String capList(String mensaje, String[] opciones){
-      if (!(opciones == null)) {
-         for (int i = 0; i < opciones.length; i++) {
-            System.out.println(i + 1 + "- " + opciones[i]);
+   /**-Método para capturar un archivo de un tipo de extension (En un selector de archivos).
+    *Extension validados, responsabilidad del programador*/
+   File capFileJOP(String mensaje, String extension) {
+      if (!(extension == null)) {
+         JFileChooser fileChooser = new JFileChooser();
+         fileChooser.setDialogTitle(mensaje);
+         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+         fileChooser.setFileFilter(new FileNameExtensionFilter(extension.toLowerCase(), extension.toLowerCase()));
+
+         File selectedFile = null;
+
+         while (selectedFile == null) {
+            int result = fileChooser.showOpenDialog(null);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+               selectedFile = fileChooser.getSelectedFile();
+               if (!selectedFile.getName().toLowerCase().endsWith(extension.toLowerCase())) {
+                  System.out.println("Por favor, selecciona un archivo con la extensión ." + extension);
+                  selectedFile = null; // Reiniciar la selección
+               }
+            } else {
+               System.out.println("No se seleccionó ningún archivo.");
+               fileChooser.setSelectedFile(null);
+            }
          }
-         int index = capInt(mensaje, 1, opciones.length);
-         return opciones[index-1];
+         return selectedFile;
       }
-      System.out.println("No hay opciones disponibles");
       return null;
+   }
+
+   /** Método para desplegar una lista utilizando JOptionpane*/
+   String capList(String mensaje, String[] opciones){
+      String aux = null;
+
+      while (aux == null){
+         aux = (String) JOptionPane.showInputDialog(
+                 null, mensaje,
+                 "Elegir",JOptionPane.QUESTION_MESSAGE,null, opciones, opciones[0]);
+      }
+      return aux;
    }
 }

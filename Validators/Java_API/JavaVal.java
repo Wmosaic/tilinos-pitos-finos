@@ -47,7 +47,7 @@ class JavaVal {
 
    /**Método para validar cadenas de texto vaciás o nulas*/
    public boolean isStr(String cadena) {
-      if (cadena == null || cadena.contains(" ") || cadena.isEmpty()){
+      if (cadena == null || cadena.isEmpty()){
          System.out.println("La cadena de texto esta vaciá");
          return true;
       }
@@ -63,5 +63,4 @@ class JavaVal {
       }
       return true;
    }
-
 }
