@@ -1,5 +1,6 @@
 #include "Validador.h"
 #include <regex>
+#include <chrono>
 #include <filesystem>
 #include <typeinfo>
 
@@ -21,7 +22,9 @@ bool Validador::isNom(std::string prueba){
     std::string patron{"^(([A-Za-z]?)| )+$"};
     std::basic_regex<char> patronRegex{patron};
 
-    return std::regex_search(prueba, patronRegex) && (prueba.length() != 0);
+    return std::regex_search(prueba, patronRegex) 
+            && (prueba.length() != 0 )
+            && prueba != "" || " ";
 }
 
 bool Validador::isDate(std::string prueba){
