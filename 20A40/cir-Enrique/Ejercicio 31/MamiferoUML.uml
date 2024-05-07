@@ -1,0 +1,31 @@
+                        _________________________________
+                        |           +Mamifero           |
+                        |-------------------------------|
+                        | - especie: String             |
+                        | - numDePatas: int             |
+                        | - color: string               |
+                        | - nombre: string              |
+                        |------------------------------ |
+                        | + setEspecie (v: string): bool|
+                        | + setNumDePatas(d: int): bool |
+                        | + setColor(e: string): bool   |
+                        | + setNombre(p: string): bool  |
+                        | + getEspecie(): string        |
+                        | + getNumDePatas(): int        |
+                        | + getColor(): string          |
+                        | + getNombre(): string         |
+                        | + toString(): string          |
+                         --------------------------------
+                                ^               ^
+                                |               |
+ ________________________________________ ________________________________________
+|                 +Perro                 |                 +Gato                  |
+|----------------------------------------|----------------------------------------
+| - numDeMordidos: int                   | - ratonesAtrapados: int                |
+| - raza: string                         | - arañados: int                        |
+|----------------------------------------|----------------------------------------
+| + setNumDeMordidos (v: int): bool      | + setRatonesAtrapados (v: int): bool   |
+| + setRaza(d: string): bool             | + setArañados(d: int): bool            |
+| + getNumDeMordidos(): int              | + getRatonesAtrapados(): int           |
+| + getRaza(): string                    | + getArañados(): int                   |
+ ---------------------------------------- ----------------------------------------

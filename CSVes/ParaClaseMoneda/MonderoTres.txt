@@ -1,0 +1,11 @@
+NombreDivisa,Valor,nomPais,año,escudo,NumeroRepetición
+Dólar estadounidense,1,Estados Unidos,2024,us_flag,3
+Euro,0.82,Unión Europea,2024,eu_flag,2
+Libra esterlina,0.72,Reino Unido,2024,uk_flag,1
+Dólar australiano,1.29,Australia,2024,au_flag,2
+Dólar canadiense,1.25,Canadá,2024,ca_flag,1
+Dólar estadounidense,1,Estados Unidos,2024,us_flag,3
+Yen japonés,109.55,Japón,2024,jp_flag,1
+Euro,0.82,Unión Europea,2024,eu_flag,2
+Dólar estadounidense,1,Estados Unidos,2024,us_flag,3
+Peso mexicano,20.03,México,2024,mx_flag,1

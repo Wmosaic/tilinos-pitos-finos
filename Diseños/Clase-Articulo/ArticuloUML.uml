@@ -1,0 +1,18 @@
+ ___________________________
+|           +Articulo        
+|---------------------------
+| - _des: str                
+| - _uni: str                
+| - _pre: float              
+| - _can: float   
+|---------------------------
+| + setDescripcion(d: str): bool 
+| + setUnidad(u: str): bool 
+| + setPrecio(p: float): bool 
+| + setCantidad(c: int): bool 
+| + getDescripcion(): str 
+| + getUnidad(): str 
+| + getPrecio(): float 
+| + getCantidad(): float
+| + toString(): str         
+ ---------------------------
