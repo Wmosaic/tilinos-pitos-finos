@@ -1,8 +1,10 @@
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.*;
+
+//------------------------------------------------VALIDATORS---------------------------------------------------//
+//-------------------------------------------------------------------------------------------------------------//
 
 class JavaVal {
 
@@ -37,8 +39,7 @@ class JavaVal {
       try {
          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
          sdf.setLenient(false);
-         @SuppressWarnings("unused")
-         Date fecha = sdf.parse(cadena);
+         sdf.parse(cadena);
          return true;
       } catch (ParseException e) {
          return false;

@@ -1,13 +1,13 @@
 import java.io.File;
 import java.util.Scanner;
 
-//Todos los capturadores de esta clase hacen uso del Scanner
+//--------------------------------------------------SCANNER-----------------------------------------------------//
+//--------------------------Todos los capturadores de esta clase hacen uso del Scanner--------------------------//
 
 public class JavaCap {
    private JavaVal val;
    Scanner scanner = new Scanner(System.in);
 
-   /**Constructores para inicializar los validadores dependiendo el contexto*/
    JavaCap(){
       this.val = new JavaVal();
    }
