@@ -491,7 +491,7 @@ public class utilFilesJava {
          FileWriter writer = new FileWriter(directorio, true);
 
          writer.append(cadena).append("\n");
-
+         
          writer.close();
 
          System.out.println("El texto se ha guardado correctamente en el archivo CSV.");
@@ -502,7 +502,7 @@ public class utilFilesJava {
 
    /**Esto funcionará en terminales que admitan códigos de escape ANSI.
     * No funcionará en Windows CMD, No funcionará en la terminal IDE.*/
-   public void clear() {
+   public static void clear() {
       System.out.print("\033[H\033[2J");
       System.out.flush();
    }
