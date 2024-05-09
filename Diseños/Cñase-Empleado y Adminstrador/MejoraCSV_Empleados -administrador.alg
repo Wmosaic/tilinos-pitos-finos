@@ -33,7 +33,20 @@ Algoritmo Empleados y administradores
       (Empleado) Nomina[50]
       (String) datosLinea[6]
       indice = 0
-      archivo = Abrir(ruta/de/archivo,Modo: Lectura)
+      
+      Imprimir "Deme la ruta de acceso de sus archivos CSV que contegan la lista de los empleados: "
+	leer rutaAcceso
+	
+	misArchivos = BuscarRutaDeAcceso(rutaAcceso)
+	
+	Para i que es igual a 0 Donde i es menor a misArchivos.longitud() y i incrementa 1 en 1:
+		Imprimir (i+1)+"."+misArchivos[i]
+	
+	Imprimir "Seleccione su archivo usando su numero: "
+	leer numeroArchivo
+	
+	Archivo = Abrir(rutaAcceso+misArchivos[numeroArchivo-1])
+	Archivo.leerLinea() //Se lee el encabezado
 
       Mientras archivo Esta Abierto Empezar:
             datosLinea = archivo.leerLinea()
