@@ -119,7 +119,7 @@ public class utilFilesJava {
    public String capDir(String mensaje) {
       String aux;
       do {
-         System.out.println(mensaje);
+         System.out.print(mensaje);
          aux = scanner.nextLine();
 
          while (aux == null) {
