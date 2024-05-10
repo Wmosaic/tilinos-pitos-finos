@@ -4,7 +4,7 @@
 	Imprimir "Capturar y desplegar una lista de monedas"
   	Imprimir "Presentes dentro de un monedero totalizando"
    	Imprimir "las monedas presentes dentro de cada divisas"
-	Imprimir "Por captura de datos Centinelas o CSV"
+	Imprimir "Por captura de datos Centinelas o CSV E INCLUYE LECTURA"
 
 2.1 CapturaManual()
 	Cuenta = 0
@@ -23,9 +23,10 @@
 		leer añoMoneda
 		Imprimir "Capture el pais de la moneda: "
 		leer nomPais
-		Imprimir "Cuantas veces se repite las caracteristicas de esta Moneda: "
+		Imprimir "Cuantas monedas del mismo valor: "
 		leer repeticionMoneda
-		listaMoneda[Cuenta] = Moneda(nomDivisa,valMoneda,nomEscudo,añoMoneda,nomPais)
+		listaMoneda[Cuenta] = Moneda(nomDivisa,valMoneda,
+								nomEscudo,añoMoneda,nomPais)
 		RepeticionMoneda[Cuenta] = repeticionMoneda
 		Cuenta++
 	Finalizar Para~~
