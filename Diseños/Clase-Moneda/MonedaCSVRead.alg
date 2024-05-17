@@ -61,7 +61,8 @@
 		añoMoneda = lineaCSV[3]
 		nomPais = lineaCSV[4]
 		repetecionMoneda[Cuenta] = lineaCSV[5]
-		listaMoneda[Cuenta] = Moneda(descripcion,unidad,cantidad,precio)
+		listaMoneda[Cuenta] = Moneda(nomDivisa,valMoneda,
+								nomEscudo,añoMoneda,nomPais)
 		Cuenta++
 	Terminar Mientras~~
 	
@@ -140,8 +141,14 @@
 		lim = listaMoneda.longitud
 		
 		Para i = 0; i < lim; i++ empezar
-			fileOut.Escribir(listaMoneda[i].toStringCSV())
-			fileOut.Escribir(","+RepeticionMoneda[i]+'\n')
+			NomDivisa = listaMoneda[i].getDivisa()
+			valMoneda = listaMoneda[i].getValor()
+			nomEscudo = listaMoneda[i].getEscudo()
+			añoMoneda = listaMoneda[i].getAño()
+			nomPais   = listaMoneda[i].getPais()
+			repetecion = repetecionMoneda[i]
+			fileOut.Escribir(nomDivisa,ValMoneda,nomEscudo,añoMoneda)
+			fileOut.Escribir(,nomPais,repetecion+'\n')
 		Terminar
 		fileOut.cerrar()
 

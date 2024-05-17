@@ -1,5 +1,0 @@
-Divisa: Dólar estadounidense
-Valor: 1.0
-Pais: Estados Unidos
-Año: 2024
-Escudo: us_flag
