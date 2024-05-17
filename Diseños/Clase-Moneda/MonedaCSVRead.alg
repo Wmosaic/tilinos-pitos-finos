@@ -131,7 +131,21 @@
 
 	archivo.Cerrar()
 
-4.3 Salida()
+4.3 escrituraData()
+		Imprimir "Ponle el nombre a tu archivo: "
+		leer nombreArchivo
+
+		fileOut = Abrir(nombreArchivo,modo: "Escritura")
+		fileOut.Escribir("Nombre,Valor,Escudo,Año,Pais,Repeticion")
+		lim = listaMoneda.longitud
+		
+		Para i = 0; i < lim; i++ empezar
+			fileOut.Escribir(listaMoneda[i].toStringCSV())
+			fileOut.Escribir(","+RepeticionMoneda[i]+'\n')
+		Terminar
+		fileOut.cerrar()
+
+4.4 Salida()
 	String newDivisas[] = setDivisas()
 	Imprimir "Su monedero: "
 	Para i = 0; i < Cuenta; i++ Empezar
@@ -165,8 +179,12 @@
 		Imprimir "Desea guardar los datos en Pantalla: "
 		leer opcArchivo
 
-		Si (opcArchivo == "S")
-			escrituraArchivo() 
+		Si (opcArchivo == 'S') escrituraArchivo() 
+		
+		Imprimir "Desea guardar los datos capturados: "
+			leer opcArchivo
+		
+		si (opcArchivo == 'S') escrituraData()
 		
 		Imprimir "Capturar otros datos AFF: "
 		leer AFF
