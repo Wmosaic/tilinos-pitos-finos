@@ -114,7 +114,27 @@ def escrituraArchivo(Monedero,repeticionMoneda,rutaFile, miList):
     for j in range(0,limS,1): 
         archivo.write(f"De la divisa: {newMonedas[j]} hubo un total de {totalDivisa[j]}\n")
     
-    archivo.close()  
+    archivo.close() 
+
+def escrituraData(Monedero, repeticionMoneda) -> None:
+    print("Usted guardar la informacion capturada")
+    nomFileOut = input("Deme el nombre del archivo: ")
+    
+    fileOut = open(nomFileOut,"w",encoding='UTF-8')
+    limMoneda = len(Monedero)
+    fileOut.write("Nombre,Valor,Escudo,Año,Pais,Repeticion"+'\n')
+    for i in range(0,limMoneda,1):
+        nomDiv = Monedero[i].getDivisa()
+        valMoneda = Monedero[i].getValor()
+        nomEscudo = Monedero[i].getEscudo()
+        añoMone = Monedero[i].getAño()
+        nomPais = Monedero[i].getPais()
+        linea = nomDiv+','+str(valMoneda)+','+nomEscudo+','+str(añoMone)
+        linea += ','+nomPais
+        fileOut.write(linea+','+str(repeticionMoneda[i])+'\n')
+    print("-"*50)
+    fileOut.close()
+     
            
 def salida(Monedero,repeticionMoneda,miList) -> None:
     subtotalDivisa,totalDivisa,newMonedas = miList[0],miList[1],miList[2]
@@ -143,10 +163,16 @@ def main() -> None:
             case _: continue
         misResul = calculos(mone,rept)
         salida(mone,rept,misResul)
-        opc = Cap.capCade("Quiere guardar la informacion en Pantalla: ")
-        if opc.lower() == "s": 
+        
+        opc = Cap.capCade("Desea guardar los datos capturados?[S/N] ",1)
+        if opc.lower() == 's': escrituraData(mone,rept)
+        
+        opc = Cap.capCade("Desea guardar la informacion en pantalla[S/N]: ",1)
+        if opc.lower() == "s":
             ruta = generarCarpeta()
             escrituraArchivo(mone,rept,ruta,misResul)
+        
+        print("-"*50)
         afir = input("Desea repetir el proceso[S/N]: ")
 
 main()
