@@ -149,7 +149,9 @@
 			añoMoneda = listaMoneda[i].getAño()
 			nomPais   = listaMoneda[i].getPais()
 			repetecion = repetecionMoneda[i]
-			fileOut.Escribir(nomDivisa,ValMoneda,nomEscudo,añoMoneda)
+			linea = nomDivisa+','+ValMoneda','+nomEscudo+','+añoMoneda+','+nomPais+','+repetecion
+
+			fileOut.Escribir(linea)
 			fileOut.Escribir(,nomPais,repetecion+'\n')
 		Terminar
 		fileOut.cerrar()
