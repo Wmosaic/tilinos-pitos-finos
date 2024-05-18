@@ -69,20 +69,22 @@
 	Regresar Cuenta
 
 3.1 setDivisas()
-	//Nota en Python puedes usar el metodo Set() para que en 
-	//automatico te filtre los elementos repetidos Simplificando este metodo
-	
 	String DivisasFiltradas[50]
 	cuentaDivisaFiltrada = 0
 	
-	Para i es igual a 0 Donde i es menor que Cuenta E i 1 en 1 Empezar
-		Para j es igual a 0 Donde j es menor que cuentaDivisaFiltrada Y j 1 en 1 Empezar
-			Si listaMoneda[i].ObtenerDivisa()  != DivisasFiltradas[j] Entoces
-				DivisaFiltradas[cuentaDivisaFiltrada] = listaMoneda[i].ObtenerDivisa()
-				cuentaDivisaFiltrada++
+	Para i = 0; i < Cuenta; i++Empezar
+	    esRepetido = Falso
+		Para j=0 j < cuentaDivisaFiltrada; j++ Empezar
+			Si listaMoneda[i].ObtenerDivisa() == DivisasFiltradas[j] Entoces
+				esRepetido = Verdadero
+				Salir del Ciclo
 			Terminar Si
-		Terminar Para j~~
-	Terminar Para i~~
+		Si(NOT(esRepetido)) Entoces
+		    DivisasFiltradas[ceuntaDivisaFiltrada] = listMoneda[i].getDivisa()
+			cuentaDivisaFiltrada++
+        Terminar Si
+		Terminar Para 
+	Terminar Para 
 				 
 3.2 Calculos()
    String newDivisas[] = setDivisas()
