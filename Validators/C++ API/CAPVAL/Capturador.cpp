@@ -1,12 +1,11 @@
 #include "Capturador.h"
 #include <iostream>
-namespace fs = std::filesystem;
 
-Capturador::Capturador() : validator(){}
+Capturador::Capturador() {Validador val = this->validator;}
 
-Capturador::Capturador(Validador val){    this-> validator = val;    }
+Capturador::Capturador(Validador val) : validator (val) {}
 
-Capturador::~Capturador(){    delete this;    }
+Capturador::~Capturador(){}
 
 int Capturador::capInt(std::string mensaje){
     std::string aux;
@@ -34,7 +33,7 @@ int Capturador::capInt(std::string mensaje,
 
         do{
             aux = capInt(mensaje);
-        } while(limiteSuperior <= aux >= limiteInferior);
+        } while(limiteSuperior < aux >= limiteInferior);
         return aux;
 }
 
@@ -62,7 +61,7 @@ double Capturador::capReal(std::string mensaje,
         int aux;
 
         do{    aux = capInt(mensaje);
-        } while(limiteSuperior <= aux >= limiteInferior);
+        } while(limiteSuperior < aux >= limiteInferior);
         return aux;
 }
 
@@ -88,13 +87,13 @@ std::string Capturador::capNom(std::string mensaje, int limiteCaracteres){
     return aux;
 }
 
-fs::path Capturador::capDir(){
-    std::string auxTest;
-    
-    std::cout << "Ingrese la ruta al directorio deseado: \n";
-    std::getline(std::cin, auxTest);
-
-    while(!validator.isDir(auxTest)){
-        std::cout << "Ingrese una ruta valida";
+std::string Capturador::capDate(std::string mensaje){
+    std::string buf;
+    std::getline(std::cin, buf);
+    while (!validator.isDate(buf) && buf == ""){
+        std::cout << mensaje << std::endl;
+        std::getline(std::cin, buf);
     }
+    return buf;
 }
+

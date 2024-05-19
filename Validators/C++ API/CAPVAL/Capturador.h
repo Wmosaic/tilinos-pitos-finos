@@ -2,10 +2,8 @@
 #define CAPTURADOR
 
 #include "Validador.h"
-#include <filesystem>
 
 class Capturador {
-private:
     Validador validator;
 
 public:
@@ -36,8 +34,6 @@ public:
     std::string capNom(std::string mensaje, int limiteCaracteres);
 
     std::string capDate(std::string mensaje);
-
-    std::filesystem::path capDir();
 
 };
 
