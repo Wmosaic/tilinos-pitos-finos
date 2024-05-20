@@ -2,7 +2,9 @@
 	Intentar
 		cadena.convertirANumero()
 		regresar Verdadero
-	en Exepcion regresar Falso
+	en Exepcion
+	    Escribir
+		regresar Falso
 
 1.0.B (Privado) boolean isNum(cadena:String)
     String patron = "^\\d+(\\.\\d+)?$" 		

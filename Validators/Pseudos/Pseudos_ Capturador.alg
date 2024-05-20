@@ -20,40 +20,43 @@
 
 	regresar variable.convertidoANumero()
 
-1.1 (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, lim:int)
-	imprimir mensaje
-	leer variable
-
-	Mientras No (esNum(variable)) Empezar
-		imprimir mensaje
-		leer variable
-	Terminar Mientras
-
-	Mientras convertirANumero(variable) <= lim Empezar 
-		imprimir "El valor debe ser mayor a " + lim
-		leer variable
-	Terminar Mientras
+1.1.A (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, lim:int)
+	aux = ""
+    num = ?
+	Empezar a hacer
+	    Mientras No(esNum(aux))
+		    imprimir mensaje
+		    leer aux
+		num = aux.convertidoANumero()
+	Mientras (num >= lim)
 
 	regresar variable.convertidoANumero()
 
-1.2 (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, limI:int, limS:int)
-	imprimir mensaje
-	leer variable
+1.1.B (Publico-Sobrecargado) (int, double) capNumero(mensaje:String, lim:int)
+    aux = ?
+	Empezar a hacer
+		aux = capNumero(mensaje)
+	Mientras (aux >= lim)
+	Regresar aux;
 
-	Mientras No (esNum(variable)) Empezar
-		imprimir mensaje
-		leer variable
-	Terminar Mientras
-
-	//En automatico al salir del primer mientras se sabe que es un numero
-	//Y puede ser comparado con los operadores racionales
-
-	Mientras No (limI <= convertirANumero(variable) <= limS) Empezar 
-		imprimir "Deber estar entre " + limI + " y " + limS
-		leer variable
-	Terminar Mientras
-
+1.2.A (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, limI:int, limS:int)
+	aux = ""
+    num = ?
+	Empezar a hacer
+	    Mientras No(esNum(aux))
+		    imprimir mensaje
+		    leer aux
+		num = aux.convertidoANumero()
+	Mientras (limS <= num <= limI)
+	
 	regresar variable.convertidoANumero()
+
+1.2.B (Publico-Sobrecargado) (int,double) capNumero(mensaje: String, limI:int, limS:int)
+    aux = ?
+	Empezar a hacer
+		aux = capNumero(mensaje)
+	Mientras (limS <=aux >= limI)
+	Regresar aux;
 
 2.0 (Publico) (String) capNom(mensaje:String)
 	imprimir mensaje
