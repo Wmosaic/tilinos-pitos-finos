@@ -23,12 +23,14 @@ public class Prueba {
     }
 
     public ArrayList<Moneda> capturaManual(){
+        String mensCap = "Capture los datos de la moneda";
+        mensCap = " y Fin para finalizar.";
         ArrayList<Moneda> monedas = new ArrayList<Moneda>();
         String div,pai,esc;
         int año,rep,cuenta = 0;
         double val;
         
-        System.out.println("Capture los datos de la moneda.");
+        System.out.println(mensCap);
         div = cap.capNom("Capture el nombre de la divisa: ",40);
         do{
             val = cap.capReal("Capture el valor de la divisa: ",1.0);
@@ -39,6 +41,7 @@ public class Prueba {
             monedas.add(new Moneda(div, val, pai, año, esc));
             repeticionMoneda[cuenta] = rep;
             cuenta++;
+            System.out.println(mensCap);
             div = cap.capNom("Capture el nombre de la divisa: ",40);
         }while(!(div.toLowerCase().equals("fin")) && cuenta <100);
 
