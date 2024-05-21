@@ -24,7 +24,7 @@ public class Prueba {
 
     public ArrayList<Moneda> capturaManual(){
         String mensCap = "Capture los datos de la moneda";
-        mensCap = " y Fin para finalizar.";
+        mensCap += " y Fin para finalizar.";
         ArrayList<Moneda> monedas = new ArrayList<Moneda>();
         String div,pai,esc;
         int año,rep,cuenta = 0;
