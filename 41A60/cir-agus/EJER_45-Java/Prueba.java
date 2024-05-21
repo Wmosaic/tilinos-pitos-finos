@@ -95,7 +95,7 @@ public class Prueba {
         int rangoNuevo = nueDivisas.size();
         int rangoViejo = monedas.size();
         double dineros = 0, valor,miSub;
-        double valorPorCadaDivisa[] = new double[nueDivisas.size()];
+        double valorPorCadaDivisa[] = new double[rangoNuevo];
         double subTotal[] = new double[rangoViejo];
         boolean comp;
         String lower;
