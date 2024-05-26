@@ -4,7 +4,8 @@ Algoritmo Empleados y administradores
           especificando su nombre, salario y fecha de nacimiento; si el 
           empleado es un administrador capture el departamento y su bono. 
           Totalice la nomina de los empleados separando los subtotales de 
-          bonos y salario  y reporte la lista de ellos con sus datos.
+          bonos y salario  y reporte la lista de ellos con sus datos permitiendo
+          la captura de datos por medio de un CSV.
 
 2.- CapturaManual(): Arreglo a usar: Nomina[10] de Empleado
       Centinela = “fin”; 
