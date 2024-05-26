@@ -102,7 +102,7 @@
    Para k = 0;k < cuenta; k++ empezar
 	subtotal[k] = repetecionMoneda[i] * listaMoneda[i].MetodoObtenerValor() 
 
-4.1 generarCarpeta()
+4.1 generarCarpeta() //Opcional
 	Imprimir "Deme el nombre del archivo: "
 	leer nombreArchivo
 	Imprimir "Ya tiene Carpeta para su Archivo [S/N]: "
@@ -152,7 +152,6 @@
 			linea = nomDivisa+','+ValMoneda','+nomEscudo+','+añoMoneda+','+nomPais+','+repetecion
 
 			fileOut.Escribir(linea)
-			fileOut.Escribir(,nomPais,repetecion+'\n')
 		Terminar
 		fileOut.cerrar()
 
