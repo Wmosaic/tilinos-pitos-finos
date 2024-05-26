@@ -12,7 +12,7 @@ class TestBox {
         b.add(t.nextLine());
     }
 
-    void repo(){   System.out.println("En la caja: "+ b.get());}
+    void repo(){ System.out.println("En la caja: "+ b.get());}
 
     public static void main(String args[]){
         TestBox tb = new TestBox();
