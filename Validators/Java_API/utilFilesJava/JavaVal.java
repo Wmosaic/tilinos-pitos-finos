@@ -1,3 +1,5 @@
+package utilFilesJava;
+
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,7 +8,7 @@ import java.util.regex.*;
 //------------------------------------------------VALIDATORS---------------------------------------------------//
 //-------------------------------------------------------------------------------------------------------------//
 
-class JavaVal {
+public class JavaVal {
 
    /**Método para validar números naturales enteros*/
    public boolean isNum(String cadena) {
