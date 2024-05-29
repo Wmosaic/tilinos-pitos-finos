@@ -5,6 +5,7 @@
 #include <iostream>
 #include <filesystem>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <algorithm>
 #include <cctype>
@@ -13,9 +14,9 @@ namespace fs = std::filesystem;
 typedef std::vector<Moneda*> Monedero;
 typedef std::vector<std::string> StrVector;
 
-std::vector<double> cuentaDivisa;
+std::vector<double> totalDivisas;
 std::vector<double> subtotal;
-std::vector<int>    cantidad;
+std::vector<int>    nMonedas;
 
 //Funcion rapida para convertir a mayusculas, devuelve std::string
 std::string aMayus(std::string& str){
@@ -92,7 +93,7 @@ void instanciarObjetos(Monedero& monedero , std::ifstream& entrada){
     typedef std::string cadena;
     Validador* val = new Validador();
     double  valor; 
-    int date, cuenta {0};
+    int date, cantidad, cuenta {0};
     cadena escudo, divisa, pais;
     cadena renglon;
     StrVector inits;
@@ -134,8 +135,14 @@ void instanciarObjetos(Monedero& monedero , std::ifstream& entrada){
             divisa = inits.at(i);
         else divisa = "DATO INVALIDO";
 
-        (cuenta%4 == 0)? cuenta=0:cuenta++;
+        if(val->isNum(inits.at(i)) && cuenta == 5)
+            cantidad = stoi(inits.at(i));
+        else cantidad = 0;
+
+
+        (cuenta%6 == 0)? cuenta=0:cuenta++;
         monedero.push_back(new Moneda(valor, date, escudo, pais, divisa));
+        nMonedas.push_back(cantidad);
     }
     delete val;
 }
@@ -157,7 +164,7 @@ void capturaManual(Monedero& monedero, Capturador*& dec){
 	// se puede perder el valor en date libremente.
         date = dec->capInt("Ingrese la cantidad de monedas.", 0);
 
-	cantidad.push_back(date);
+	nMonedas.push_back(date);
         pais   = dec->capNom("Ingrese el nombre del pais.");
     } while (aMayus(pais) != "FIN");
 }
@@ -183,9 +190,40 @@ StrVector filtrarDivisas(Monedero& monedero){
     return divisas;
 }
 
-void calculos(Monedero& monedero, StrVector& divisas){
-	double* montoCada[] = new montoCada[50];
-	double* subtotal[] = new subtotal[50];
+StrVector divisaPorMoneda(Monedero& monedero){
+    StrVector divisas;
+    for(const auto& moneda : monedero)
+        divisas.push_back(moneda->getDivisa());
+    return divisas;
+}
 
-	for  = 0; j
+/* 
+    para cada moneda()
+	conseguir valor total de la moneda (totalMoneda = valor * cantidad)
+ 	sumar valor a la suma de divisas()
+		para cada divisa filtrada()
+			si divisaF == moneda.divisa entonces
+				sumaDivisas  = sumadivisas + totalMoneda
+		
+ */
+void calculos(Monedero& monedero, StrVector& divisasFiltradas){
+    StrVector divisasMonedero {divisaPorMoneda(monedero)};
+	double dineros;
+    const int sexo = divisasFiltradas.size();
+    
+
+    //BASURA ALERT
+    for (const auto& divisa : divisasFiltradas)
+        totalDivisas.push_back(0.0);
+
+    for(int i = 0; i < divisasFiltradas.size(); i++){
+        dineros = 0;
+        for(int j = 0 ; j < monedero.size(); j++)
+            if(divisasFiltradas.at(j) == monedero.at(i)->getDivisa())
+                dineros += nMonedas.at(j) * monedero.at(j)->getValor();
+        totalDivisas.at(i) = dineros;
+    }
+
+    for (int i = 0; i < monedero.size(); i++)
+        subtotal.push_back(nMonedas.at(i) * monedero.at(i)->getValor());
 }
