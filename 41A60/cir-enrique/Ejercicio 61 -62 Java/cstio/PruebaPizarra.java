@@ -1,7 +1,10 @@
+package cstio;
+
 import cstio.Pizarra;
 
 import java.awt.Color;
 
+@SuppressWarnings("unused")
 class PruebaPizarra {
   public static void main(String[] args) {
 //    SwingUtilities.invokeLater(new Runnable() {
