@@ -115,11 +115,11 @@ void instanciarObjetos(Monedero& monedero , std::ifstream& entrada){
 
     inits = leerLinea(renglon);
     for(int i = 0; i < inits.size(); i++){
-        if(val->isNum(inits.at(i)) && cuenta == 0)
+        if(val->isNumI(inits.at(i)) && cuenta == 0)
             valor = stof(inits.at(i));
         else valor = 0;
 
-        if(val->isNum(inits.at(i)) && cuenta == 1)
+        if(val->isNumI(inits.at(i)) && cuenta == 1)
             date = stoi(inits.at(i));
         else date = 0;
 
@@ -135,7 +135,7 @@ void instanciarObjetos(Monedero& monedero , std::ifstream& entrada){
             divisa = inits.at(i);
         else divisa = "DATO INVALIDO";
 
-        if(val->isNum(inits.at(i)) && cuenta == 5)
+        if(val->isNumI(inits.at(i)) && cuenta == 5)
             cantidad = stoi(inits.at(i));
         else cantidad = 0;
 
@@ -241,12 +241,42 @@ void salidaImpresa(Monedero& monedero, StrVector& divisasFiltradas){
 	    << ": " << totalDivisas.at(i) << std::endl;
 }
 
-void salidaArchivo(Monedero& monedero){
-    typedef std::string cadena{
-	cap->capNom("Ingrese el nombre del archivo de guardado") + ".mdat"
-    };
-    std::ofstream archivo(cadena);
+void salidaArchivo(Monedero& monedero, StrVector& divisasFiltradas){
+    Capturador *cap = new Capturador();
+    typedef std::string cadena;
+    cadena nombre;
+	nombre = cap->capNom("Ingrese el nombre del archivo de guardado") + ".mdat";
+    
+    std::ofstream archivo(nombre);
     for (int i = 0; i < monedero.size(); i++)
         archivo << monedero.at(i)->toString() 
-	    + "Cantidad: " + nMonedas.at(i) + "\n";
+	    + "Cantidad: " << nMonedas.at(i) + "\n";
+    
+    for(int j = 0; j < totalDivisas.size(); j++)
+        archivo << "Por cada divisa: " + divisasFiltradas.at(j)+" es: "+std::to_string(totalDivisas.at(j)); 
+    
+    delete[] cap;
+
 }
+
+int main(int argc, char const *argv[])
+{
+ File *fil = new File();
+    std::string opc;
+    Monedero mon;
+    StrVector divV;
+    Capturador *cap = new Capturador(); 
+    meta();
+    cap -> capNom("Capture su opcion [A]rchivo o [M]anual");
+    if(aMayus(opc) == "A")
+        leerArchivos(mon,fil);
+    if(aMayus(opc) == "M") 
+        capturaManual(mon,cap);   
+    
+    calculos(mon,divV);
+    salidaImpresa(mon,divV);
+    salidaArchivo(mon,divV);
+    
+    return 0;
+}
+
