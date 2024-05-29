@@ -24,12 +24,12 @@ public class Dialog {
   String inf = "Informacion para usted:";
   String tit = "opciones disponibles";
   JFrame f = null;
-  int WARNING = jop.WARNING_MESSAGE;
-  int ERROR = jop.ERROR_MESSAGE;
-  int PLAIN = jop.PLAIN_MESSAGE;
-  int INFO = jop.INFORMATION_MESSAGE;
-  int YESNO = jop.YES_NO_CANCEL_OPTION;
-  int QUEST = jop.QUESTION_MESSAGE;
+  int WARNING = JOptionPane.WARNING_MESSAGE;
+  int ERROR = JOptionPane.ERROR_MESSAGE;
+  int PLAIN = JOptionPane.PLAIN_MESSAGE;
+  int INFO = JOptionPane.INFORMATION_MESSAGE;
+  int YESNO = JOptionPane.YES_NO_CANCEL_OPTION;
+  int QUEST = JOptionPane.QUESTION_MESSAGE;
   Object[] opt = {"Yes, please",
                   "No, thanks",
                   "No eggs, no ham!"};
@@ -40,7 +40,7 @@ public class Dialog {
    *  @return No return value
    */
   public void display(String msg) {
-    jop.showMessageDialog(f,msg);
+    JOptionPane.showMessageDialog(f,msg);
   }
 
   /** void display(String msg, char ch) 
@@ -56,16 +56,16 @@ public class Dialog {
   public void display(String msg, char ch) {
     switch (ch) {
       case 'W':
-      case 'w': jop.showMessageDialog(f, msg, war, WARNING);
+      case 'w': JOptionPane.showMessageDialog(f, msg, war, WARNING);
                 break;
       case 'E':
-      case 'e': jop.showMessageDialog(f, msg, err, ERROR);
+      case 'e': JOptionPane.showMessageDialog(f, msg, err, ERROR);
                 break;
       case 'P':
-      case 'p': jop.showMessageDialog(f, msg, pla, PLAIN);
+      case 'p': JOptionPane.showMessageDialog(f, msg, pla, PLAIN);
                 break;
       case 'I': 
-      case 'i': jop.showMessageDialog(f, msg, inf, INFO, icon);
+      case 'i': JOptionPane.showMessageDialog(f, msg, inf, INFO, icon);
                 break;
     }
   }
@@ -80,7 +80,7 @@ public class Dialog {
    *  @return Object
    */
   public Object readObject(Object msg, String tit, int o) {
-    return jop.showInputDialog(f, msg, tit, PLAIN, icon, pos, pos[o]);
+    return JOptionPane.showInputDialog(f, msg, tit, PLAIN, icon, pos, pos[o]);
   }
 
  /** String readString(String msg) 
@@ -89,7 +89,7 @@ public class Dialog {
    *  @return No return value
    */
   public String readString(String msg) {
-    return jop.showInputDialog(msg);
+    return JOptionPane.showInputDialog(msg);
   }
 
  /** int readOption (Object msg, String tit, int o) 
@@ -103,7 +103,7 @@ public class Dialog {
    */
   
   public int readOption(Object []opt, Object msg, String tit, int o) {
-    return jop.showOptionDialog(f, msg, tit, YESNO, QUEST, null, opt, opt[o]);   
+    return JOptionPane.showOptionDialog(f, msg, tit, YESNO, QUEST, null, opt, opt[o]);   
   }
 
  /**  
@@ -116,7 +116,7 @@ public class Dialog {
    */
  
   public int confirm(Object msg, String tit) {
-    return jop.showConfirmDialog(f, msg, tit, YESNO);
+    return JOptionPane.showConfirmDialog(f, msg, tit, YESNO);
   }
 
   public static void main(String args[]) {
