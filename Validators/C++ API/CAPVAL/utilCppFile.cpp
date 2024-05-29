@@ -3,9 +3,9 @@
 #include <fstream>
 #include <iostream>
 
-File::File(){    Capturador cap = this->capturador;    }
+File::File(){    Capturador* cap = new Capturador();    }
 
-File::File(Capturador cap) : capturador(cap) {}
+File::File(Capturador* cap) : capturador(cap) {}
 
 File::~File(){}
 
@@ -117,12 +117,12 @@ fs::path File::capFile(){
     }     // asi que se queda con un catch -> throw cagadisimo JAJAJA
     
     printFiles(nuevoDir);
-
+    //auto aqui representa un std::vector de std::path
     auto archs {getDirs(nuevoDir)};
     const int LIMITE_SELECCION {1};
     const int LIMITE_ARCHIVOS {archs.size()};
 
-    int opc {capturador.capInt(
+    int opc {capturador->capInt(
         "Ingrese el numero del archivo deseado: ",
          LIMITE_SELECCION, LIMITE_ARCHIVOS
         )
@@ -150,7 +150,7 @@ fs::path File::capFile(std::string ext){
     const int LIMITE_SELECCION {1};
     const int LIMITE_ARCHIVOS {archs.size()};
 
-    int opc {capturador.capInt(
+    int opc {capturador->capInt(
         "Ingrese el numero del archivo deseado: ",
          LIMITE_SELECCION, LIMITE_ARCHIVOS
         )

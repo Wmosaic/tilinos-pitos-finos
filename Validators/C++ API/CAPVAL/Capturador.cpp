@@ -23,7 +23,7 @@ int Capturador::capInt(std::string mensaje){
 int Capturador::capInt(std::string mensaje, int limite){
     int aux;
 
-    do{    aux = capInt(mensaje);    } while(aux >= limite);
+    do{    aux = capInt(mensaje);    } while(aux > limite);
     return aux;
 }
 
@@ -33,7 +33,7 @@ int Capturador::capInt(std::string mensaje,
 
         do{
             aux = capInt(mensaje);
-        } while(limiteSuperior < aux >= limiteInferior);
+        } while(limiteSuperior < aux > limiteInferior);
         return aux;
 }
 
@@ -52,7 +52,7 @@ double Capturador::capReal(std::string mensaje){
 double Capturador::capReal(std::string mensaje, int limite){
     int aux;
 
-    do{    aux = capReal(mensaje);    } while(aux >= limite);
+    do{    aux = capReal(mensaje);    } while(aux > limite);
     return aux;
 }
 
@@ -61,7 +61,7 @@ double Capturador::capReal(std::string mensaje,
         int aux;
 
         do{    aux = capInt(mensaje);
-        } while(limiteSuperior < aux >= limiteInferior);
+        } while(limiteSuperior < aux > limiteInferior);
         return aux;
 }
 
