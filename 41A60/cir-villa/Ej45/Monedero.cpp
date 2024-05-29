@@ -88,7 +88,8 @@ StrVector leerLinea(const std::string& linea) {
 void instanciarObjetos(Monedero& monedero , std::ifstream& entrada){
     typedef std::string cadena;
     Validador* val = new Validador();
-    int valor, date, cuenta = 0;
+    double  valor; 
+    int date, cuenta {0};
     cadena escudo, divisa, pais;
     cadena renglon;
     StrVector inits;
@@ -111,7 +112,7 @@ void instanciarObjetos(Monedero& monedero , std::ifstream& entrada){
     inits = leerLinea(renglon);
     for(int i = 0; i < inits.size(); i++){
         if(val->isNum(inits.at(i)) && cuenta == 0)
-            valor = stoi(inits.at(i));
+            valor = stof(inits.at(i));
         else valor = 0;
 
         if(val->isNum(inits.at(i)) && cuenta == 1)
@@ -133,6 +134,7 @@ void instanciarObjetos(Monedero& monedero , std::ifstream& entrada){
         (cuenta%4 == 0)? cuenta=0:cuenta++;
         monedero.push_back(new Moneda(valor, date, escudo, pais, divisa));
     }
+    delete val;
 }
 
 void capturaManual(Monedero& monedero, Capturador*& dec){
@@ -150,6 +152,27 @@ void capturaManual(Monedero& monedero, Capturador*& dec){
         
         pais   = dec->capNom("Ingrese el nombre del pais.");
     } while (aMayus(pais) != "FIN");
+}
+
+// Funcion para filtrar divisas usando for-each
+// los tipos auto son moneda* y std::string&
+// Esta funcion se hace bien facil con el not in de python 
+
+StrVector filtrarDivisas(Monedero& monedero){
+    StrVector divisas;
+    int divisasDistintas;
+    for (const auto& moneda : monedero){
+        divisasDistintas = 0;        
+
+        for(const auto& divisa : divisas){
+            if(moneda->getDivisa() != divisa ){
+                divisasDistintas++;
+            } else break;
+            if(divisasDistintas == divisas.size())
+                divisas.push_back(moneda->getDivisa());
+        }
+    }
+    return divisas;
 }
 
 void calculos(Monedero& monedero, StrVector& divisas){

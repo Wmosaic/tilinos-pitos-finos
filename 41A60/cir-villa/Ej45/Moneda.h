@@ -8,23 +8,23 @@ class Moneda{
     typedef std::string cadena;
 private:
     Validador* val = new Validador();
-    int valor;
+    double valor;
     int fecha;
     cadena escudo;
     cadena pais;
     cadena divisa;
 public:
     Moneda();
-    Moneda(int val, int dat, cadena esc, cadena pai, cadena div);
+    Moneda(double val, int dat, cadena esc, cadena pai, cadena div);
     ~Moneda();
 
-    bool setValor(int val);
+    bool setValor(double val);
     bool setFecha(int dat);
     bool setEscudo(cadena esc);
     bool setPais(cadena pai);
     bool setDivisa(cadena div);
 
-    int getValor();
+    double getValor();
     int getFecha();
     cadena getEscudo();
     cadena getPais();

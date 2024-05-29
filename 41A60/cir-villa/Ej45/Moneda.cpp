@@ -6,10 +6,10 @@ Moneda::~Moneda(){}
 
 Moneda::Moneda(){}
 
-Moneda::Moneda(int val, int dat, cadena esc, cadena pai, cadena div) :
+Moneda::Moneda(double val, int dat, cadena esc, cadena pai, cadena div) :
     valor(val), fecha (dat), escudo (esc), pais (pai), divisa (div){}
 
-bool Moneda::setValor(int val){
+bool Moneda::setValor(double val){
     if (!(val >= 0)) return false;
     this->valor = val;
 }
@@ -34,7 +34,7 @@ bool Moneda::setDivisa(cadena div){
     this->divisa = div;
 }
 
-int Moneda::getValor()    {    return this->valor;    }
+double Moneda::getValor() {    return this->valor;    }
 int Moneda::getFecha()    {    return this->fecha;    }
 cadena Moneda::getEscudo(){    return this->escudo;   }
 cadena Moneda::getPais()  {    return this->pais;     }
