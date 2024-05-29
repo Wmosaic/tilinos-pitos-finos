@@ -1,6 +1,6 @@
 #include "Moneda.h"
-#include "../Validators/C++ API/CAPVAL/Capturador.h"
-#include "../Validators/c++ API/CAPVAL/utilCppFile.h"
+#include "CAPVAL/Capturador.h"
+#include "CAPVAL/utilCppFile.h"
 #include <string>
 #include <iostream>
 #include <filesystem>
@@ -225,5 +225,28 @@ void calculos(Monedero& monedero, StrVector& divisasFiltradas){
     }
 
     for (int i = 0; i < monedero.size(); i++)
-        subtotal.push_back(nMonedas.at(i) * monedero.at(i)->getValor());
+	subtotal.push_back(nMonedas.at(i) * monedero.at(i)->getValor());
+}
+
+void salidaImpresa(Monedero& monedero, StrVector& divisasFiltradas){
+    for(int i = 0; i < monedero.size(); i++){
+        std::cout << monedero.at(i)->toString() << "\tCantidad: " <<
+	    std::to_string(nMonedas.at(i)) << std::endl;
+	std::cout << "Valor total de la moneda: " << 
+            subtotal.at(i) << std::endl;
+    }
+
+    for (int i = 0; i < divisasFiltradas.size(); i++)
+	std::cout << "Total de " << divisasFiltradas.at(i) 
+	    << ": " << totalDivisas.at(i) << std::endl;
+}
+
+void salidaArchivo(Monedero& monedero){
+    typedef std::string cadena{
+	cap->capNom("Ingrese el nombre del archivo de guardado") + ".mdat"
+    };
+    std::ofstream archivo(cadena);
+    for (int i = 0; i < monedero.size(); i++)
+        archivo << monedero.at(i)->toString() 
+	    + "Cantidad: " + nMonedas.at(i) + "\n";
 }

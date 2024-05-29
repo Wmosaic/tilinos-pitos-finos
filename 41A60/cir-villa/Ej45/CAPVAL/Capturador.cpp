@@ -13,7 +13,7 @@ int Capturador::capInt(std::string mensaje){
     std::cout << mensaje << std::endl;
     std::getline(std::cin, aux);
 
-    while(!validator.isNum(aux)){
+    while(!validator.isNumI(aux)){
         std::cout << "Solo se admiten numeros." << std::endl;
         std::getline(std::cin, aux);
     }
@@ -42,7 +42,7 @@ double Capturador::capReal(std::string mensaje){
     std::cout << mensaje << std::endl;
     std::getline(std::cin, aux);
 
-    while(!validator.isNum(aux)){
+    while(!validator.isNumD(aux)){
         std::cout << "Solo se admiten numeros." << std::endl;
         std::getline(std::cin, aux);
     }

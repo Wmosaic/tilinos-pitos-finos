@@ -10,9 +10,18 @@ namespace fs = std::filesystem;
 Validador::Validador(){}
 Validador::~Validador(){}
 
-bool Validador::isNum(std::string prueba){
+bool Validador::isNumI(std::string prueba){
     try{
-        int x{std::stod(prueba)};
+        int x{std::stoi(prueba)};
+        return true;
+    }
+    catch(...){    return false;    }
+    
+}
+
+bool Validador::isNumD(std::string prueba){
+    try{
+        int x{std::stoi(prueba)};
         return true;
     }
     catch(...){    return false;    }

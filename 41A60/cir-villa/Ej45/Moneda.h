@@ -1,7 +1,7 @@
 #ifndef MONEDA
 #define MONEDA
 
-#include "../CAPVAL/Validador.h"
+#include "CAPVAL/Validador.h"
 #include <string>
 
 class Moneda{
