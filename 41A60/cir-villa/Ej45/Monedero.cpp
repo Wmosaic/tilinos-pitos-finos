@@ -13,6 +13,9 @@ namespace fs = std::filesystem;
 typedef std::vector<Moneda*> Monedero;
 typedef std::vector<std::string> StrVector;
 
+std::vector<double> cuentaDivisa;
+std::vector<double> subtotal;
+std::vector<int>    cantidad;
 
 //Funcion rapida para convertir a mayusculas, devuelve std::string
 std::string aMayus(std::string& str){
@@ -146,10 +149,15 @@ void capturaManual(Monedero& monedero, Capturador*& dec){
     do {
         escudo = dec->capNom("Ingrese el nombre del escudo.");
         divisa = dec->capNom("Ingrese el nombre de la divisa.");
-        valor  = dec->capReal("Ingrese el valor de la moneda.");
+        valor  = dec->capReal("Ingrese el valor de la moneda.", 0);
         date   = dec->capInt("Ingrese el valor del año.", 1600, 2024);
         monedero.push_back(new Moneda(valor, date, escudo, pais, divisa));
-        
+
+	// Se usa date porque ya se instancio el objeto, por lo que 
+	// se puede perder el valor en date libremente.
+        date = dec->capInt("Ingrese la cantidad de monedas.", 0);
+
+	cantidad.push_back(date);
         pais   = dec->capNom("Ingrese el nombre del pais.");
     } while (aMayus(pais) != "FIN");
 }
@@ -176,5 +184,8 @@ StrVector filtrarDivisas(Monedero& monedero){
 }
 
 void calculos(Monedero& monedero, StrVector& divisas){
-    
+	double* montoCada[] = new montoCada[50];
+	double* subtotal[] = new subtotal[50];
+
+	for  = 0; j
 }
