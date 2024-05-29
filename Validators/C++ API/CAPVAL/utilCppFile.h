@@ -8,11 +8,11 @@
 namespace fs = std::filesystem;
 
 class File{
-    Capturador capturador;
+    Capturador* capturador;
 
 public:
     File();
-    File(Capturador cap_param);
+    File(Capturador* cap_param);
     ~File();
 
     bool isDir(std::string ruta_param);
