@@ -4,13 +4,13 @@
 #include "Validador.h"
 
 class Capturador {
-    Validador validator;
+    Validador* validator;
 
 public:
     
 
     Capturador();
-    Capturador(Validador val);
+    Capturador(Validador* val);
     ~Capturador();
 
     int capInt(std::string mensaje);

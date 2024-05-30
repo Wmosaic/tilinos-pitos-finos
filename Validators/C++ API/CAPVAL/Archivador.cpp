@@ -1,9 +1,9 @@
-#include "utilCPPFile.h"
+#include "Archivador.h"
 #include <windows.h>
 #include <fstream>
 #include <iostream>
 
-File::File(){    Capturador* cap = new Capturador();    }
+File::File(){    Capturador* cap = this->capturador;    }
 
 File::File(Capturador* cap) : capturador(cap) {}
 
