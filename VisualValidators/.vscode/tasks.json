@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C/C++: g++.exe build active file",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${workspaceFolder}/C++Validators_VisualStudioCode/Main.cpp",
+                "${workspaceFolder}/C++Validators_VisualStudioCode/utilFilesCpp/C++Cap.cpp",
+                "${workspaceFolder}/C++Validators_VisualStudioCode/utilFilesCpp/C++Val.cpp",
+                "${workspaceFolder}/C++Validators_VisualStudioCode/utilFilesCpp/Miscellaneous.cpp",
+                "-o",
+                "${workspaceFolder}/C++Validators_VisualStudioCode/programa.exe",
+                "-I",
+                "${workspaceFolder}/C++Validators_VisualStudioCode/utilFilesCpp"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compilación de todos los archivos necesarios para el proyecto."
+        }
+    ]
+}

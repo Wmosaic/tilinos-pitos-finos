@@ -1,3 +1,0 @@
-Para correr el archivo se utiliza como método principal "Runway"
-javac Runway.java
-java Runway 
