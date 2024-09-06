@@ -39,8 +39,6 @@ public class Miscellaneous {
       }
    }
 
-
-
    /**Método para leer archivos csv/txt, adjuntando los datos en líneas de texto
     * Recibe la dirección de un archivo para su funcionamiento
     * @param directorio La ruta/dirección del archivo que se va a leer
@@ -65,10 +63,10 @@ public class Miscellaneous {
    private String[] readInfo(BufferedReader archivo){
       try{
          ArrayList<String> lineas = new ArrayList<>();
-         String lineaCSV;
+         String lineasFile;
 
-         while ((lineaCSV = archivo.readLine()) != null) {
-            lineas.add(lineaCSV);
+         while ((lineasFile = archivo.readLine()) != null) {
+            lineas.add(lineasFile);
          }
          return lineas.toArray(new String[0]);
       } catch (IOException e) {
@@ -81,7 +79,7 @@ public class Miscellaneous {
       try {
          archivo.close();
       } catch (IOException e) {
-         System.out.println("Error: Imposible cerrar el archivo: " + e.getMessage());
+         System.out.println("Error: Imposible cerrar el archivo: ");
       }
    }
 
@@ -111,19 +109,20 @@ public class Miscellaneous {
 
    /** Método para guardar los datos en el archivo. */
    private void saveInfo(Writer wf, String cadena){
-      try{
+      try {
          wf.append(cadena).append("\n");
-      } catch (IOException e){
-         System.out.println("Error: No se pudo guardar la información");
+      } catch (IOException e) {
+         System.out.println("Error: No se pudo guardar la información. " + e.getMessage());
       }
    }
 
    /** Método para leer el archivo. */
    private void closeFile(Writer wf){
-      try{
+      try {
+         wf.flush();
          wf.close();
-      } catch (IOException e){
-         System.out.println("Error: No se puede cerrar el archivo");
+      } catch (IOException e) {
+         System.out.println("Error: No se puede cerrar el archivo. " + e.getMessage());
       }
    }
 
