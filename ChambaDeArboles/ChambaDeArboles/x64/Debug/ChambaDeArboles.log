@@ -1,12 +1,2 @@
 ﻿  main.cpp
-C:\Users\Chenchual\source\repos\ChambaDeArboles\trees.hpp(56,33): error C2100: you cannot dereference an operand of type 'void'
-  (compiling source file 'main.cpp')
-      C:\Users\Chenchual\source\repos\ChambaDeArboles\trees.hpp(56,33):
-      the template instantiation context (the oldest one first) is
-          C:\Users\Chenchual\source\repos\ChambaDeArboles\main.cpp(10,15):
-          see reference to class template instantiation 'trees::BBTNode<int>' being compiled
-          C:\Users\Chenchual\source\repos\ChambaDeArboles\trees.hpp(56,11):
-          while compiling class template member function 'trees::BBTNode<int> trees::BBTNode<int>::getLeft(void)'
-              C:\Users\Chenchual\source\repos\ChambaDeArboles\main.cpp(18,12):
-              see the first reference to 'trees::BBTNode<int>::getLeft' in 'main'
-  
+  ChambaDeArboles.vcxproj -> C:\Users\Chenchual\Documents\GitHub\tilinos-pitos-finos\ChambaDeArboles\x64\Debug\ChambaDeArboles.exe

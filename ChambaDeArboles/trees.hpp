@@ -46,12 +46,14 @@ namespace trees
 		BBTNode getLeft()	{ return *m_leftNode;  }
 		BBTNode getRight()	{ return *m_rightNode; }
 		BBTNode getRoot()	{ return *m_rootNode;  }
-		int getData()		{ return m_data;       }
+		int getData() const	{ return m_data;       }
 
 		void disconnect() 
 		{
 			m_leftNode = m_rightNode = m_rootNode = nullptr;
 		}
+
+		BBTNode* ptr() { return this; }
 
 	};
 
@@ -63,30 +65,31 @@ namespace trees
 
 	private:
 
-		bool insertNode(BBTNode currentNode, int data) 
+		bool insertNode(BBTNode currentNode, const BBTNode& insertingNode)
 		{
-			if (data == currentNode.getData())
+			if (insertingNode.getData() == currentNode.getData())
 				return false;
 
-			if (data < currentNode.getData())
+			if (insertingNode.getData() < currentNode.getData())
 			{
-				if (&currentNode.getLeft()) 
-					return insertNode(currentNode.getLeft(), data);
+				if (currentNode.getLeft().ptr())
+					return insertNode(currentNode.getLeft(), insertingNode);
 				else
-					currentNode.setLeft(BBTNode(data, currentNode));
+					currentNode.setLeft(insertingNode);
 			}
 			else
 			{
-				if (&currentNode.getRight())
-					return insertNode(currentNode.getRight(), data);
+				if (currentNode.getRight().ptr())
+					return insertNode(currentNode.getRight(), insertingNode.getData());
 				else
-					currentNode.setRight(BBTNode(data, currentNode));
+					currentNode.setRight(insertingNode);
 			}
 			return true;
 		}
 
+
 	public:
-		bool add(int data) { return insertNode(*m_treeRoot, data); }
+		bool add(int data) { return insertNode(*m_treeRoot, BBTNode(data)); }
 		bool add(BBTNode node) { return insertNode(*m_treeRoot, node.getData()); }
 
 		bool postOrder();
