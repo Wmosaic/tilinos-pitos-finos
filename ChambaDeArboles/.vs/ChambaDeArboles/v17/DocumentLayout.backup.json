@@ -9,6 +9,9 @@
     {
       "AbsoluteMoniker": "D:0:0:{F92F588C-5113-419C-A3F5-5A4180AB6177}|ChambaDeArboles.vcxproj|C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\trees.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F92F588C-5113-419C-A3F5-5A4180AB6177}|ChambaDeArboles.vcxproj|solutionrelative:trees.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Chenchual\\source\\repos\\ChambaDeListas\\ListaCustom.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +21,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 116,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
@@ -28,12 +31,35 @@
               "RelativeDocumentMoniker": "trees.hpp",
               "ToolTip": "C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\trees.hpp",
               "RelativeToolTip": "trees.hpp",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFwAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAswGYAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-10-21T16:53:51.92Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ListaCustom.h",
+              "DocumentMoniker": "C:\\Users\\Chenchual\\source\\repos\\ChambaDeListas\\ListaCustom.h",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\source\\repos\\ChambaDeListas\\ListaCustom.h",
+              "ToolTip": "C:\\Users\\Chenchual\\source\\repos\\ChambaDeListas\\ListaCustom.h",
+              "RelativeToolTip": "..\\..\\..\\..\\source\\repos\\ChambaDeListas\\ListaCustom.h",
+              "ViewState": "AgIAAPQAAAAAAAAAAAAAAPQAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-30T17:40:18.556Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 116,
+          "SelectedChildIndex": 0,
+          "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -42,14 +68,10 @@
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-21T17:27:20.824Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             }
           ]
         }

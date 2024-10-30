@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
+#include <functional>
 
 namespace trees 
 {
+
 	//Blanced Binary Tree Node
 
 	class BBTNode
@@ -89,8 +91,28 @@ namespace trees
 
 
 	public:
+
+		BinaryTree(BBTNode root) : m_treeRoot(&root) 
+		{
+			m_nodeCount = 1;
+		}
+
 		bool add(int data) { return insertNode(*m_treeRoot, BBTNode(data)); }
 		bool add(BBTNode node) { return insertNode(*m_treeRoot, node.getData()); }
+
+		template<typename value_type>
+		void allLeft(std::function<value_type> function) 
+		{
+			BBTNode* currentNode = this->m_treeRoot;
+
+			do
+			{
+				function(currentNode->getData());
+				currentNode = currentNode->getLeft().ptr();
+			} while (currentNode->getLeft().ptr());
+
+		}
+
 
 		bool postOrder();
 		bool preOrder();
