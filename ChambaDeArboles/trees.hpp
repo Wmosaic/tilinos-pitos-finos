@@ -1,6 +1,12 @@
 #pragma once
 #include <iostream>
 #include <functional>
+#include <iostream>
+
+
+
+//Verdaderisimo sadpapu, toca hacerlo dinamicamente probablemente
+
 
 namespace trees 
 {
@@ -13,110 +19,144 @@ namespace trees
 		int m_data;
 		BBTNode* m_leftNode;
 		BBTNode* m_rightNode;
-		BBTNode* m_rootNode;
 
 	public:
 
 		//Params: Initialize the value of the node with the constructor parameter.
-		//every node is set to null
-		BBTNode(int data) : m_data(data) 
-		{
-			m_leftNode = m_rightNode = m_rootNode = nullptr;
-			m_data = data;
-		}
-
-		BBTNode(int data, BBTNode rootNode) : m_data(data), m_rootNode(&rootNode)
+		//every node connecting is set to null
+		BBTNode(int data) : m_data(data)
 		{
 			m_leftNode = m_rightNode = nullptr;
 		}
 
 		//Default destructor
-		~BBTNode() { }
+		~BBTNode() {}
 
 		//Sets the given data as that node's data
 		void setData(int p_data)    { m_data = p_data; }
 
 		//Sets the given node as the left node
-		void setLeft(BBTNode node)  { m_leftNode = &node; }
+		void setLeft(BBTNode* node)  { m_leftNode = node; }
 
 		//Sets the given node as the right node
-		void setRight(BBTNode node) { m_rightNode = &node; }
-
-		//Sets the given node as the root node
-		void setRoot(BBTNode node)  { m_rootNode = &node; }
+		void setRight(BBTNode* node) { m_rightNode = node; }
 		
-		BBTNode getLeft()	{ return *m_leftNode;  }
-		BBTNode getRight()	{ return *m_rightNode; }
-		BBTNode getRoot()	{ return *m_rootNode;  }
+		BBTNode* getLeft()	{ return m_leftNode;  }
+		BBTNode* getRight()	{ return m_rightNode; }
+
 		int getData() const	{ return m_data;       }
 
 		void disconnect() 
 		{
-			m_leftNode = m_rightNode = m_rootNode = nullptr;
+			m_leftNode = m_rightNode = nullptr;
 		}
-
-		BBTNode* ptr() { return this; }
 
 	};
 
 	class BinaryTree
 	{
 	private:
-		int m_nodeCount;
 		BBTNode* m_treeRoot;
 
 	private:
 
-		bool insertNode(BBTNode currentNode, const BBTNode& insertingNode)
+		bool insertNode(BBTNode* currentNode, int data) 
 		{
-			if (insertingNode.getData() == currentNode.getData())
+			return insertNode(currentNode, new BBTNode(data));
+		}
+
+		bool insertNode(BBTNode* currentNode, BBTNode* newNode) 
+		{
+			if (!currentNode) 
+			{
+				m_treeRoot = newNode;
+				return true;
+			}
+
+			int nodeValue = currentNode->getData();
+			int newValue = newNode->getData();
+
+
+			if (nodeValue == newValue)
 				return false;
 
-			if (insertingNode.getData() < currentNode.getData())
+			if (newValue < nodeValue)
 			{
-				if (currentNode.getLeft().ptr())
-					return insertNode(currentNode.getLeft(), insertingNode);
+				if (!currentNode->getLeft()) 
+				{
+					currentNode->setLeft(newNode); 
+					return true;
+				}
 				else
-					currentNode.setLeft(insertingNode);
+				{
+					return insertNode(currentNode->getLeft(), newNode);
+				}
 			}
 			else
 			{
-				if (currentNode.getRight().ptr())
-					return insertNode(currentNode.getRight(), insertingNode.getData());
+				if (!currentNode->getRight())
+				{
+					currentNode->setRight(newNode);
+					return true;
+				}
 				else
-					currentNode.setRight(insertingNode);
+				{
+					return insertNode(currentNode->getRight(), newNode);
+				}
 			}
-			return true;
 		}
 
 
 	public:
 
-		BinaryTree(BBTNode root) : m_treeRoot(&root) 
+		BinaryTree(BBTNode* root) 
 		{
-			m_nodeCount = 1;
+			m_treeRoot = root;
 		}
 
-		bool add(int data) { return insertNode(*m_treeRoot, BBTNode(data)); }
-		bool add(BBTNode node) { return insertNode(*m_treeRoot, node.getData()); }
-
-		template<typename value_type>
-		void allLeft(std::function<value_type> function) 
+		BinaryTree()
 		{
-			BBTNode* currentNode = this->m_treeRoot;
+			m_treeRoot = nullptr;
+		}
 
-			do
+		bool add(int data) { return insertNode(m_treeRoot, new BBTNode(data)); }
+		bool add(BBTNode* node) { return insertNode(m_treeRoot, node); }
+
+		//Triste, pero va a tocar dehacerse de las funciones complejas que queriamos
+		//puesto que no disponemos de tiempo suficiente como para implementar bien
+		void preOrder(BBTNode* currentNode)
+		{
+			if (currentNode) 
 			{
-				function(currentNode->getData());
-				currentNode = currentNode->getLeft().ptr();
-			} while (currentNode->getLeft().ptr());
-
+				std::cout << currentNode->getData() << ' ';
+				preOrder(currentNode->getLeft());
+				preOrder(currentNode->getRight());
+			}
 		}
 
+		void postOrder(BBTNode* currentNode) 
+		{
+			if (currentNode)
+			{
+				postOrder(currentNode->getLeft());
+				postOrder(currentNode->getRight());
+				std::cout << currentNode->getData() << ' ';
+			}
+		}
 
-		bool postOrder();
-		bool preOrder();
-		bool inOrder();
+		void inOrder(BBTNode* currentNode) 
+		{
+			if (currentNode)
+			{
+				inOrder(currentNode->getLeft());
+				std::cout << currentNode->getData() << ' ';
+				inOrder(currentNode->getRight());
+			}
+		}
+
+		void preOrder()  { preOrder (m_treeRoot); }
+		void postOrder() { postOrder(m_treeRoot); }
+		void inOrder()   { inOrder  (m_treeRoot); }
 
 	};
 
