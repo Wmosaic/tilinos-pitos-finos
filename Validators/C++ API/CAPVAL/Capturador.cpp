@@ -1,9 +1,9 @@
 #include "Capturador.h"
 #include <iostream>
 
-Capturador::Capturador() {Validador val = this->validator;}
+Capturador::Capturador() {    Validador* val = this->validator;    }
 
-Capturador::Capturador(Validador val) : validator (val) {}
+Capturador::Capturador(Validador* val) : validator (val) {}
 
 Capturador::~Capturador(){}
 
@@ -13,7 +13,7 @@ int Capturador::capInt(std::string mensaje){
     std::cout << mensaje << std::endl;
     std::getline(std::cin, aux);
 
-    while(!validator.isNumI(aux)){
+    while(!validator->isNumI(aux)){
         std::cout << "Solo se admiten numeros." << std::endl;
         std::getline(std::cin, aux);
     }
@@ -42,7 +42,7 @@ double Capturador::capReal(std::string mensaje){
     std::cout << mensaje << std::endl;
     std::getline(std::cin, aux);
 
-    while(!validator.isNumD(aux)){
+    while(!validator->isNumD(aux)){
         std::cout << "Solo se admiten numeros." << std::endl;
         std::getline(std::cin, aux);
     }
@@ -71,7 +71,7 @@ std::string Capturador::capNom(std::string mensaje){
     std::cout << mensaje << std::endl;
     std::getline(std::cin, aux);
 
-    while(!validator.isNom(aux)){
+    while(!validator->isNom(aux)){
         std::cout << "Solo se admiten cadenas." << std::endl;
         std::getline(std::cin, aux);
     }
@@ -90,7 +90,7 @@ std::string Capturador::capNom(std::string mensaje, int limiteCaracteres){
 std::string Capturador::capDate(std::string mensaje){
     std::string buf;
     std::getline(std::cin, buf);
-    while (!validator.isDate(buf) && buf == ""){
+    while (!validator->isDate(buf) && buf == ""){
         std::cout << mensaje << std::endl;
         std::getline(std::cin, buf);
     }
