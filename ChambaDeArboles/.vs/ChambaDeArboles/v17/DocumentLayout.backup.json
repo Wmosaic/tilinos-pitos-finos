@@ -1,0 +1,60 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F92F588C-5113-419C-A3F5-5A4180AB6177}|ChambaDeArboles.vcxproj|C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F92F588C-5113-419C-A3F5-5A4180AB6177}|ChambaDeArboles.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F92F588C-5113-419C-A3F5-5A4180AB6177}|ChambaDeArboles.vcxproj|C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\trees.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F92F588C-5113-419C-A3F5-5A4180AB6177}|ChambaDeArboles.vcxproj|solutionrelative:trees.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 116,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "trees.hpp",
+              "DocumentMoniker": "C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\trees.hpp",
+              "RelativeDocumentMoniker": "trees.hpp",
+              "ToolTip": "C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\trees.hpp",
+              "RelativeToolTip": "trees.hpp",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAowLQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-21T16:53:51.92Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\main.cpp",
+              "RelativeDocumentMoniker": "main.cpp",
+              "ToolTip": "C:\\Users\\Chenchual\\Documents\\GitHub\\tilinos-pitos-finos\\ChambaDeArboles\\main.cpp",
+              "RelativeToolTip": "main.cpp",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAowBMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-31T05:00:07.959Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
