@@ -1,12 +1,5 @@
 #pragma once
 #include <iostream>
-#include <functional>
-#include <iostream>
-
-
-
-//Verdaderisimo sadpapu, toca hacerlo dinamicamente probablemente
-
 
 namespace trees 
 {
@@ -17,34 +10,46 @@ namespace trees
 	{
 	private:
 		int m_data;
+		int m_equilibrium;
 		BBTNode* m_leftNode;
 		BBTNode* m_rightNode;
 
 	public:
 
-		//Params: Initialize the value of the node with the constructor parameter.
-		//every node connecting is set to null
 		BBTNode(int data) : m_data(data)
 		{
 			m_leftNode = m_rightNode = nullptr;
+			m_equilibrium = 0;
 		}
 
-		//Default destructor
 		~BBTNode() {}
 
-		//Sets the given data as that node's data
 		void setData(int p_data)    { m_data = p_data; }
 
-		//Sets the given node as the left node
 		void setLeft(BBTNode* node)  { m_leftNode = node; }
 
-		//Sets the given node as the right node
 		void setRight(BBTNode* node) { m_rightNode = node; }
-		
+
+		void setEquilibrium(int equilibrium) { m_equilibrium = equilibrium; }
+
 		BBTNode* getLeft()	{ return m_leftNode;  }
 		BBTNode* getRight()	{ return m_rightNode; }
 
 		int getData() const	{ return m_data;       }
+		int getEquilibrium() const { return m_equilibrium; }
+
+		void updateEquilibriumFactor() {
+			int leftHeight = calculateHeight(m_leftNode);
+			int rightHeight = calculateHeight(m_rightNode);
+			m_equilibrium = leftHeight - rightHeight;
+		}
+
+		int calculateHeight(BBTNode* node) {
+			if (node == nullptr) return -1;
+			int leftHeight = calculateHeight(node->getLeft());
+			int rightHeight = calculateHeight(node->getRight());
+			return 1 + std::max(leftHeight, rightHeight);
+		}
 
 		void disconnect() 
 		{
@@ -60,52 +65,85 @@ namespace trees
 
 	private:
 
-		bool insertNode(BBTNode* currentNode, int data) 
-		{
-			return insertNode(currentNode, new BBTNode(data));
+		BBTNode* rightRotate(BBTNode* node) {
+			BBTNode* left = node->getLeft();
+			BBTNode* right = left->getRight();
+
+			left->setRight(node);
+			node->setLeft(right);
+
+			node->updateEquilibriumFactor();
+			left->updateEquilibriumFactor();
+
+			return left; 
 		}
 
-		bool insertNode(BBTNode* currentNode, BBTNode* newNode) 
+		BBTNode* leftRotate(BBTNode* node) {
+			BBTNode* right = node->getRight();
+			BBTNode* left = right->getLeft();
+
+			right->setLeft(node);
+			node->setRight(left);
+
+			node->updateEquilibriumFactor();
+			right->updateEquilibriumFactor();
+
+			return right; 
+		}
+
+		BBTNode* leftRightRotate(BBTNode* node) {
+			node->setLeft(leftRotate(node->getLeft())); 
+			return rightRotate(node); 
+		}
+
+		BBTNode* rightLeftRotate(BBTNode* node) {
+			node->setRight(rightRotate(node->getRight())); 
+			return leftRotate(node); 
+		}
+
+		BBTNode* balance(BBTNode* node) {
+			node->updateEquilibriumFactor();
+
+			if (node->getEquilibrium() > 1) {
+				if (node->getLeft()->getEquilibrium() < 0)
+					return leftRightRotate(node);
+				return rightRotate(node);
+			}
+			else if (node->getEquilibrium() < -1) {
+				if (node->getRight()->getEquilibrium() > 0)
+					return rightLeftRotate(node);
+				return leftRotate(node);
+			}
+
+			return node; 
+		}
+
+		BBTNode* insertNode(BBTNode* currentNode, BBTNode* newNode)
 		{
-			if (!currentNode) 
+			if (!currentNode)
 			{
-				m_treeRoot = newNode;
-				return true;
+				return newNode;
 			}
 
 			int nodeValue = currentNode->getData();
 			int newValue = newNode->getData();
 
-
 			if (nodeValue == newValue)
-				return false;
+				return nullptr;
 
 			if (newValue < nodeValue)
 			{
-				if (!currentNode->getLeft()) 
-				{
-					currentNode->setLeft(newNode); 
-					return true;
-				}
-				else
-				{
-					return insertNode(currentNode->getLeft(), newNode);
-				}
+				currentNode->setLeft(insertNode(currentNode->getLeft(), newNode));
 			}
 			else
 			{
-				if (!currentNode->getRight())
-				{
-					currentNode->setRight(newNode);
-					return true;
-				}
-				else
-				{
-					return insertNode(currentNode->getRight(), newNode);
-				}
+				currentNode->setRight(insertNode(currentNode->getRight(), newNode));
 			}
-		}
 
+			currentNode->updateEquilibriumFactor();
+
+			return balance(currentNode); 
+		}
 
 	public:
 
@@ -119,11 +157,23 @@ namespace trees
 			m_treeRoot = nullptr;
 		}
 
-		bool add(int data) { return insertNode(m_treeRoot, new BBTNode(data)); }
+		bool add(int data)
+		{
+			BBTNode* newNode = new BBTNode(data);
+
+			if (!m_treeRoot)
+			{
+				m_treeRoot = newNode;
+				return true; 
+			}
+
+			m_treeRoot = insertNode(m_treeRoot, newNode);
+
+			return m_treeRoot != nullptr; 
+		}
+
 		bool add(BBTNode* node) { return insertNode(m_treeRoot, node); }
 
-		//Triste, pero va a tocar dehacerse de las funciones complejas que queriamos
-		//puesto que no disponemos de tiempo suficiente como para implementar bien
 		void preOrder(BBTNode* currentNode)
 		{
 			if (currentNode) 
